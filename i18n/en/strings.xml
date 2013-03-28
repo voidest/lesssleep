@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="welcome">Welcome to %s!</string>
+	<string name="welcome_message">Welcome to Kitchen Sink for Titanium/</string>
+	<string name="user_agent_message">user agent set to</string>
+	<string name="format_test">Your name is %s</string>
+	<string name="base_ui_title">Base UI</string>
+	<string name="controls_win_title">Controls</string> 
+	<string name="phone_win_title">Phone</string>
+	<string name="platform_win_title">Platform</string>
+	<string name="mashups_win_title">Mashups</string>
+	<string name="main_tab_title">Главная</string>
+	<string name="edit_tab_title">Edit</string>
+	<string name="info_tab_title">Info</string>
+	<string name="settings_tab_title">Settings</string>
+	<string name="sleep_btn_txt">Спать</string>
+	<string name="nearest_sleep">Ближайший сон</string>
+	<string name="sleep_left">Осталось</string>
+	<string name="edit_move_btn">Сместить</string>
+	<string name="edit_skip_btn">Пропустить</string>
+</resources>
