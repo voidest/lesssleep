@@ -91,6 +91,10 @@ function MainView(parentRect) {
    		font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
    		height: '35%'
 		});
+	button.addEventListener('click',function(e)
+	{
+   		Ti.App.fireEvent("sleepButtonPressed", {data: "sleepIntervals"});
+	});
 	/*button.add(Ti.UI.createLabel({
     	text: L('sleep_btn_txt'),
     	color: 'red',

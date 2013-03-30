@@ -54,9 +54,7 @@ function ClockView(myWidth, myHeight) {
  		 "}"+
  		 "</style>"+ 		 
  		 "<meta charset=\"utf-8\">"+
- 		 "<script type=\"text/javascript\" src=\"./jquery-1.9.1.js\"></script>" +
- 		 "<script type=\"text/javascript\" src=\"./kinetic-v4.4.0.min.js\"></script>" +
-			"<script type=\"text/javascript\" src=\"./ClockWidget.js\"></script>"+
+ 			"<script type=\"text/javascript\" src=\"./ClockWidget.js\"></script>"+
  		"</head>"+
  		"<body>"+
  		 "<canvas id=\"canvas\" width=\"" + w*2 + "\" height=\"" + h*2 + "\">"+

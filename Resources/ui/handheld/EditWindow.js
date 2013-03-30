@@ -1,7 +1,7 @@
 //Application Window Component Constructor
 function EditWindow() {
 	//load component dependencies
-	var MainView = require('ui/common/EditView');
+	var EditView = require('ui/common/EditView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
@@ -10,7 +10,7 @@ function EditWindow() {
 	self.layout = 'vertical';
 		
 	//construct UI
-	var firstView = new MainView();
+	var firstView = new EditView();
 	self.add(firstView);
 	
 	return self;
