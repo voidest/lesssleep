@@ -21,10 +21,12 @@ function SleepView() {
  		 "}"+
  		 "</style>"+ 		 
  		 "<meta charset=\"utf-8\">"+
+ 		 "<link rel=\"stylesheet\" type=\"text/css\" href=\"./counter.css\"/>" +  		 
  			"<script type=\"text/javascript\" src=\"./flipcounter.js\"></script>"+
- 			"<script type=\"text/javascript\" src=\"./SleepTimer.js\"></script>"+
+ 		"<div id=\"wrapper\"><div id=\"flip-counter\" class=\"flip-counter\"></div></div>" +	
  		"</head>"+
- 		"<body>"+ 		
+ 		"<body>"+
+ 		"<script type=\"text/javascript\" src=\"./SleepTimer.js\"></script>"+ 		
 		 "</body>"+
 		"</html>" ;  
 		webView.frame = self.frame;		
