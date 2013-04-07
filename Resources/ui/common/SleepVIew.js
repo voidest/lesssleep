@@ -12,7 +12,7 @@ function SleepView() {
 	  width:'100%' ,
       height:'100%'          
     });
-	var htmlContent = 
+	/*var htmlContent = 
    		"<html>"+
  		"<head>"+
  		 "<style>"+
@@ -33,7 +33,8 @@ function SleepView() {
 		webView.scalesPageToFit = true;
 	    webView.disableBounce = true;
 		
-		webView.html = htmlContent;
+		webView.html = htmlContent;*/
+		webView.url = "./cdtimer.html";
 		self.add(webView);
 		webView.reload();
 		var osname = Ti.Platform.osname;
