@@ -2,7 +2,7 @@
 function ApplicationWindow() {
 	//load component dependencies
 	var MainView = require('ui/common/MainView');
-	var SleepView = require('ui/common/SleepView');
+	var SleepView = require('ui/common/SleepVIew');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
