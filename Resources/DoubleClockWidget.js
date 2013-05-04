@@ -3,8 +3,7 @@ var delta = 1000;
 var perc = 0.8;
 var width;
 var height;
-var centerX;
-var centerY;
+
 //images
 var bgrImage;
 var clockBgr;
@@ -26,11 +25,11 @@ var arrowRadFrac = 1.3 / 46.0;
 var ctx;
 var canvas;
 
-var watchesX;
-var watchesY;
-var watchesSize;
+
 
 var timeIntervals = [];
+
+var watchesData = [];
 
 var fadeInOn = 0;
 var fadeOutOn = 0;
@@ -52,29 +51,17 @@ function getAngles(timeInterval)
   return [startAngle, endAngle];
 }
 
-function drawCanvas()
+function drawWatches(wData, drawArrow, angle)
 {
-  var date = new Date();
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();                    
-  hours = hours >= 12 ? hours - 12 : hours;
-  var newAngle = HHMMToAngles(hours, minutes);
-  //var newAngle = (2 * Math.PI * seconds) / (60);
-  var deltaAngle = angle - newAngle;
-  //Ti.API.info("Received " + angle  + " " + newAngle + " new rows.");
-  if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && fadeInOn === 0 && fadeOutOn === 0)
-  {
-  	return;
-  } 
-  angle = newAngle;
-  ctx.drawImage(bgrImage,0,0,width, height);
-  ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
-  
-    
+  var watchesX = wData.x;
+  var watchesY = wData.y;
+  var watchesSize = wData.size; 
+  var centerX = watchesX + watchesSize / 2;
+  var centerY = watchesY + watchesSize / 2;
+  ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
   var watchesRad = watchesSize * (250 - 45) / 500;
-  for(var idx = 0; idx < timeIntervals.length; ++idx)
+  /*for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var angles = getAngles(timeIntervals[idx]);
     var begAngle = angles[1];
@@ -88,46 +75,74 @@ function drawCanvas()
     ctx.lineTo(centerX, centerY);  
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
-  }
+  }*/
  
-   
-  var arrowLen = watchesRad * yArrowScale;
-  ctx.save();
-  //ctx.translate(3,3);
-  ctx.shadowColor = "rgba(75,75,75,75)";
-  ctx.shadowBlur = 8;
-  ctx.shadowOffsetX = 3;
-  ctx.shadowOffsetY = 3;
-  ctx.beginPath();  
-  ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(155,155,155,1)";
-  ctx.fill();
+  if(drawArrow) 
+  {
+    var arrowLen = watchesRad * yArrowScale;
+    ctx.save();
+    //ctx.translate(3,3);
+    ctx.shadowColor = "rgba(75,75,75,75)";
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
+    ctx.beginPath();  
+    ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(155,155,155,1)";
+    ctx.fill();
+    
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
+    ctx.strokeStyle = "rgba(155,155,155,1)";
+    ctx.stroke();
+    ctx.restore();
+     
+    
+    ctx.beginPath();  
+    ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
+    ctx.fillStyle = "rgb(206,23,23)";
+    ctx.fill();
+    
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
+    ctx.strokeStyle = "rgb(206,23,23)";
+    ctx.stroke();
+  }
   
-  ctx.lineWidth = 7;
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
-  ctx.strokeStyle = "rgba(155,155,155,1)";
-  ctx.stroke();
-  ctx.restore();
-   
-  
-  ctx.beginPath();  
-  ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
-  ctx.fillStyle = "rgb(206,23,23)";
-  ctx.fill();
-  
-  ctx.lineWidth = 7;
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
-  ctx.strokeStyle = "rgb(206,23,23)";
-  ctx.stroke();
   
   var mountHalf = mountFrac * watchesSize;
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
   ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf, 2 * mountHalf, 2 * mountHalf);
 
+  
+}
+
+function drawCanvas()
+{
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();                    
+  var am = hours < 12;
+  hours = hours >= 12 ? hours - 12 : hours;
+  var newAngle = HHMMToAngles(hours, minutes);
+  //var newAngle = (2 * Math.PI * seconds) / (60);
+  var deltaAngle = angle - newAngle;
+  //Ti.API.info("Received " + angle  + " " + newAngle + " new rows.");
+  if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && fadeInOn === 0 && fadeOutOn === 0)
+  {
+  	return;
+  } 
+  angle = newAngle;
+  ctx.drawImage(bgrImage,0,0,width, height);
+  drawWatches(watchersData[0], am, angle);
+  drawWatches(watchersData[1], !am, angle);
+  
+ /* 
   ctx.fillStyle = "#494d56";
   ctx.font = "bold 26pt Helvetica Neue ";
   var dgtC = 1.03;
@@ -136,7 +151,7 @@ function drawCanvas()
   ctx.fillText("12", centerX - symbolW, centerY - dgtC * watchesRad);
   ctx.fillText("3", centerX + dgtC * watchesRad/* + symbolW*/, centerY + symbolH / 2);
   ctx.fillText("6", centerX - symbolW / 2, centerY + dgtC * watchesRad + symbolH);
-  ctx.fillText("9", centerX - dgtC * watchesRad - symbolW, centerY + symbolH / 2 );
+  ctx.fillText("9", centerX - dgtC * watchesRad - symbolW, centerY + symbolH / 2 );*/
 }
 
 
@@ -163,11 +178,24 @@ window.onload = function() {
     width = canvas.width;
     height = canvas.height;
      
-    centerX = width / 2;
+    /*centerX = width / 2;
     centerY = height / 2;
     watchesSize = (width > height ? height : width) * perc;
     watchesX = (width - watchesSize) / 2;
-    watchesY = (height - watchesSize) / 2;
+    watchesY = (height - watchesSize) / 2;*/
+    var leftPerc = 0.05;
+    var leftW = {
+        x: width * leftPerc,
+        y: width * leftPerc,
+        size: width * (0.5 - leftPerc) 
+    };
+    watchersData.push(leftW);   
+    var rightW = {
+        x: width * leftPerc,
+        y: width * (0.5 + leftPerc),
+        size: width * (0.5 - leftPerc)
+    };
+    watchersData.push(rightW);   
 
      //images 
     bgrImage = new Image();
