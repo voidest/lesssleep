@@ -40,18 +40,22 @@ function HHMMToAngles(hh, mm)
 }
 
 //var cx = 
-function getAngles(timeInterval)
+function getAngles(timeInterval, amTime)
 {
-  startAngle = HHMMToAngles(timeInterval[0], timeInterval[1]);
+  
   if(timeInterval[2] != timeInterval[5])
   {
-    return [startAngle, 2 * Math.PI];
+  	if(timeInterval[2] === amTime)  	 
+      return [HHMMToAngles(timeInterval[0], timeInterval[1]), 2 * Math.PI];
+    else
+      return [0, HHMMToAngles(timeInterval[3], timeInterval[4])];  
   }
+  startAngle = HHMMToAngles(timeInterval[0], timeInterval[1]);
   endAngle   = HHMMToAngles(timeInterval[3], timeInterval[4]);
   return [startAngle, endAngle];
 }
 
-function drawWatches(wData, drawArrow, angle)
+function drawWatches(wData, drawArrow, angle, amTime)
 {
   var watchesX = wData.x;
   var watchesY = wData.y;
@@ -61,10 +65,13 @@ function drawWatches(wData, drawArrow, angle)
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
   var watchesRad = watchesSize * (250 - 45) / 500;
-  /*for(var idx = 0; idx < timeIntervals.length; ++idx)
+  for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
-  	var angles = getAngles(timeIntervals[idx]);
-    var begAngle = angles[1];
+  	var angles = getAngles(timeIntervals[idx], amTime);
+  	var curr = timeIntervals[idx]; 
+  	if(curr[2] != amTime && amTime != curr[5])
+  	  continue;
+  	var begAngle = angles[1];
     var endAngle = angles[0];
     //Ti.API.info("" + angles + " new rows.");
     ctx.beginPath();
@@ -75,7 +82,7 @@ function drawWatches(wData, drawArrow, angle)
     ctx.lineTo(centerX, centerY);  
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
-  }*/
+  }
  
   if(drawArrow) 
   {
@@ -91,7 +98,7 @@ function drawWatches(wData, drawArrow, angle)
     ctx.fillStyle = "rgba(155,155,155,1)";
     ctx.fill();
     
-    ctx.lineWidth = 7;
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -105,7 +112,7 @@ function drawWatches(wData, drawArrow, angle)
     ctx.fillStyle = "rgb(206,23,23)";
     ctx.fill();
     
-    ctx.lineWidth = 7;
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -138,9 +145,9 @@ function drawCanvas()
   	return;
   } 
   angle = newAngle;
-  ctx.drawImage(bgrImage,0,0,width, height);
-  drawWatches(watchersData[0], am, angle);
-  drawWatches(watchersData[1], !am, angle);
+  //ctx.drawImage(bgrImage,0,0,width, height);
+  drawWatches(watchesData[0], am, angle, 0);
+  drawWatches(watchesData[1], !am, angle, 1);
   
  /* 
   ctx.fillStyle = "#494d56";
@@ -149,7 +156,7 @@ function drawCanvas()
   var symbolH = watchesSize / 18;
   var symbolW = watchesSize / 25;
   ctx.fillText("12", centerX - symbolW, centerY - dgtC * watchesRad);
-  ctx.fillText("3", centerX + dgtC * watchesRad/* + symbolW*/, centerY + symbolH / 2);
+  ctx.fillText("3", centerX + dgtC * watchesRad, centerY + symbolH / 2);
   ctx.fillText("6", centerX - symbolW / 2, centerY + dgtC * watchesRad + symbolH);
   ctx.fillText("9", centerX - dgtC * watchesRad - symbolW, centerY + symbolH / 2 );*/
 }
@@ -177,7 +184,6 @@ window.onload = function() {
 
     width = canvas.width;
     height = canvas.height;
-     
     /*centerX = width / 2;
     centerY = height / 2;
     watchesSize = (width > height ? height : width) * perc;
@@ -187,17 +193,16 @@ window.onload = function() {
     var leftW = {
         x: width * leftPerc,
         y: width * leftPerc,
-        size: width * (0.5 - leftPerc) 
+        size: width * (0.5 - 2 * leftPerc) 
     };
-    watchersData.push(leftW);   
+    watchesData.push(leftW);   
     var rightW = {
-        x: width * leftPerc,
-        y: width * (0.5 + leftPerc),
-        size: width * (0.5 - leftPerc)
+        x: width * (0.5 + leftPerc),
+        y: width * leftPerc,
+        size: width * (0.5 - 2 * leftPerc)
     };
-    watchersData.push(rightW);   
-
-     //images 
+    watchesData.push(rightW);   
+    //images 
     bgrImage = new Image();
     bgrImage.src = './images/background.png';
 
@@ -224,7 +229,7 @@ window.onload = function() {
     angle = HHMMToAngles(hours, minutes) + Math.PI / 2;
     //angle = (2 * Math.PI * seconds) / (60);
     
-    Ti.App.addEventListener("web:data", function (event) {
+    Ti.App.addEventListener("web:data1", function (event) {
     	timeIntervals = event.data;
     	//alert("" + timeIntervals[0]);
     //	Ti.API.info("Received " + timeIntervals + " new rows.");

@@ -25,8 +25,10 @@ function EditView() {
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,
-	  width:'100%' ,
-      height:'100%'          
+	  left:'0%',
+	  top:'12%',
+	  width:'70%' ,
+      height: '75%'  , backgroundColor : 'transparent'        
     });
 	 var first = Boolean(true);
 	self.layout = 'vertical';
@@ -34,15 +36,15 @@ function EditView() {
 	var topView = Ti.UI.createView({width:'100%', height:'30%', backgroundImage:'./images/gray-line-big.png'});
 	self.addEventListener('postlayout',function(e)
 	{
-		var w = self.size.width;
-		var h = self.size.height * 0.3;
+		var w = self.size.width * 0.7;
+		var h = self.size.height * 0.3 * 0.75;
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.2;
 		//webView.reload();
 		//webView.repaint(); 
-		if(h < currH)
+		/*if(h < currH)
 		{
 			return;
-		}
+		}*/
 		Ti.API.info("Received " + w + " " + h + " new rows.");
 		if(!first)
 		{
@@ -60,11 +62,11 @@ function EditView() {
  		 "<meta name=\"viewport\" content =\"width=" + 2 * w + ", height=" + 2 * h + ", user-scalable=no\"/>"+
  		 "<style>"+
  		 "body{"+
- 		 "margin:0;"+ 		 
+ 		 "margin:0;background-color:RGBA(0,0,0,0);"+ 		 
  		 "}"+
  		 "</style>"+ 		 
  		 "<meta charset=\"utf-8\">"+
- 			"<script type=\"text/javascript\" src=\"./ClockWidget.js\"></script>"+
+ 			"<script type=\"text/javascript\" src=\"./DoubleClockWidget.js\"></script>"+
  		"</head>"+
  		"<body>"+
  		 "<canvas id=\"canvas\" width=\"" + w*2 + "\" height=\"" + h*2 + "\">"+
@@ -91,9 +93,10 @@ function EditView() {
 		//sleepIntervals.push({hhs: 4, mms : 30, pms : true, hhe : 5, mme : 30, pme : true});
 		//sleepIntervals.push({hhs: 6, mms : 20, pms : true, hhe : 8, mme : 30, pme : true});
 		//webView.evalJS("setIntervals1();");
+		var sleepIntervals = [];
 		sleepIntervals.push([10, 50, 1, 11, 50, 1]);
 		sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
-		sleepIntervals.push([ 6, 20, 1,  8, 30, 1]);
+		sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);
 		
 		webView.addEventListener('load', function(e) {
 			/*if(!firstLoad)
@@ -101,7 +104,7 @@ function EditView() {
 			firstLoad = Boolean(false);*/
 			//alert(sleepIntervals);
 			//webView.evalJS("setIntervals('" + sleepIntervals + "');");  
-			Ti.App.fireEvent("web:data", {data: sleepIntervals});
+			Ti.App.fireEvent("web:data1", {data: sleepIntervals});
 			webView.frame = self.frame;	
 		
 			webView.disableBounce = true;
