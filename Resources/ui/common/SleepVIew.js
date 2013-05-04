@@ -9,38 +9,60 @@ function SleepView() {
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,
-	  width:'100%' ,
-      height:'100%'          
+	  left : '20%',	
+	  width:'60%' 
+    //  height:'100%'          
     });
-	/*var htmlContent = 
-   		"<html>"+
- 		"<head>"+
- 		 "<style>"+
- 		 "body{"+
- 		 "margin:0;"+ 		 
- 		 "}"+
- 		 "</style>"+ 		 
- 		 "<meta charset=\"utf-8\">"+
- 		 "<link rel=\"stylesheet\" type=\"text/css\" href=\"./counter.css\"/>" +  		 
- 			"<script type=\"text/javascript\" src=\"./flipcounter.js\"></script>"+
- 		"<div id=\"wrapper\"><div id=\"flip-counter\" class=\"flip-counter\"></div></div>" +	
- 		"</head>"+
- 		"<body>"+
- 		"<script type=\"text/javascript\" src=\"./SleepTimer.js\"></script>"+ 		
-		 "</body>"+
-		"</html>" ;  
-		webView.frame = self.frame;		
-		webView.scalesPageToFit = true;
-	    webView.disableBounce = true;
-		
-		webView.html = htmlContent;*/
-		webView.url = "./cdtimer.html";
-		self.add(webView);
-		webView.reload();
-		var osname = Ti.Platform.osname;
-		if (osname === 'iphone' || osname === 'ipad') {
-			webView.repaint(); 
-		}
+	webView.url = "./cdtimer.html";
+	//self.add(webView);
+	webView.reload();
+	var osname = Ti.Platform.osname;
+	if (osname === 'iphone' || osname === 'ipad') {
+		webView.repaint(); 
+	}
+	
+	var timerView = Ti.UI.createView({top : '30%', width:'100%', height:'30%'});
+	timerView.add(webView);
+	self.add(timerView);
+	
+	var botView = Ti.UI.createView({top : '60%', width:'100%', height:'30%'});
+	
+	var buttonWake = Titanium.UI.createButton({
+   		title: L('wake_up_btn'),
+   		//width: '30%',
+   		//backgroundColor :'#ff0000',
+   		backgroundImage:'./images/button-red.png',
+   		backgroundSelectedImage:'./images/button-red-active.png',
+   		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+   		left:'5%',
+   		width: '42%',
+   		height: '25%'
+		});
+	var buttonChng = Titanium.UI.createButton({
+   		title: L('edit_skip_btn'),
+   		//width: '30%',
+   		//backgroundColor :'#ff0000',
+   		backgroundImage:'./images/button-red.png',
+   		backgroundSelectedImage:'./images/button-red-active.png',
+   		font:{fontSize:24,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+   		left:'53%',
+   		width: '42%',
+   		height: '25%'
+		});	
+	buttonWake.addEventListener('click', function(e)
+	{
+		alert('kal');
+		var date = new Date (); 
+		var notification = Ti.App.iOS.scheduleLocalNotification (
+			{ alertBody: "Kitchen Sink was put in background", 
+			alertAction: "Re-Launch!", 
+			userInfo: {"hello": "world"}, 
+			sound: "pop.caf", 
+			date: new Date (new Date (). getTime () + 5000) });
+	})
+	botView.add(buttonWake);
+	botView.add(buttonChng);
+	self.add(botView);	
 	return self;
 }
 	

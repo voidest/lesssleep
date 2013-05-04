@@ -22,11 +22,95 @@ function EditView() {
 	backgroundImage :"images/background.png"*/});
 	
 	//self.add(basicSwitch);
+	var webView = Ti.UI.createWebView({
+		disableBounce:true,
+		scalesPageToFit:true,
+	  width:'100%' ,
+      height:'100%'          
+    });
+	 var first = Boolean(true);
 	self.layout = 'vertical';
 	
 	var topView = Ti.UI.createView({width:'100%', height:'30%', backgroundImage:'./images/gray-line-big.png'});
-	
+	self.addEventListener('postlayout',function(e)
+	{
+		var w = self.size.width;
+		var h = self.size.height * 0.3;
+		var currH = Ti.Platform.displayCaps.platformHeight * 0.2;
+		//webView.reload();
+		//webView.repaint(); 
+		if(h < currH)
+		{
+			return;
+		}
+		Ti.API.info("Received " + w + " " + h + " new rows.");
+		if(!first)
+		{
+			self.visible = true;
+			return;
+		}
+		first = Boolean(false);
+		
+		//webView.width = w;
+		//webView.height = h;
+   		var htmlContent = 
+   		"<html>"+
+ 		"<head>"+
+ 		 "<title>canvas</title>"+
+ 		 "<meta name=\"viewport\" content =\"width=" + 2 * w + ", height=" + 2 * h + ", user-scalable=no\"/>"+
+ 		 "<style>"+
+ 		 "body{"+
+ 		 "margin:0;"+ 		 
+ 		 "}"+
+ 		 "</style>"+ 		 
+ 		 "<meta charset=\"utf-8\">"+
+ 			"<script type=\"text/javascript\" src=\"./ClockWidget.js\"></script>"+
+ 		"</head>"+
+ 		"<body>"+
+ 		 "<canvas id=\"canvas\" width=\"" + w*2 + "\" height=\"" + h*2 + "\">"+
+ 		   "<p>Lol</p>"+
+ 		 "</canvas>"+
+		 "</body>"+
+		"</html>" ;  
+		webView.frame = self.frame;		
+		webView.scalesPageToFit = true;
+	    webView.disableBounce = true;
+		
+		webView.html = htmlContent;
+		webView.scalesPageToFit = true;
+	    webView.disableBounce = true;
+	    topView.add(webView);
+		webView.reload();
+		webView.scalesPageToFit = true;
+	    webView.disableBounce = true;
+		var osname = Ti.Platform.osname;
+		if (osname === 'iphone' || osname === 'ipad') {
+			webView.repaint(); 
+		}
+		//sleepIntervals.push({hhs: 10, mms : 50, pms : true, hhe : 11, mme : 50, pme : true});
+		//sleepIntervals.push({hhs: 4, mms : 30, pms : true, hhe : 5, mme : 30, pme : true});
+		//sleepIntervals.push({hhs: 6, mms : 20, pms : true, hhe : 8, mme : 30, pme : true});
+		//webView.evalJS("setIntervals1();");
+		sleepIntervals.push([10, 50, 1, 11, 50, 1]);
+		sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
+		sleepIntervals.push([ 6, 20, 1,  8, 30, 1]);
+		
+		webView.addEventListener('load', function(e) {
+			/*if(!firstLoad)
+			  return;
+			firstLoad = Boolean(false);*/
+			//alert(sleepIntervals);
+			//webView.evalJS("setIntervals('" + sleepIntervals + "');");  
+			Ti.App.fireEvent("web:data", {data: sleepIntervals});
+			webView.frame = self.frame;	
+		
+			webView.disableBounce = true;
+		});
+		webView.touchEnabled = true;	
+		
+	});	
 	//topView.layout = 'horizontal';
+	
 	self.add(topView);
 	
 	//TABLE VIEW********
@@ -156,9 +240,9 @@ function EditView() {
    		image:'./icons/icon-undo.png',
    		//backgroundSelectedImage:'./images/button-red-active.png',
    		//font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'2%',
+   		left:'40%',
    		width:35,
-   		height: '35%'
+   		height: 35
 		});
 	buttonView.add(undoButton);
 	
@@ -173,18 +257,18 @@ function EditView() {
    		width: '30%',
    		height: '35%'
 		});
-	buttonView.add(button);
+	//buttonView.add(button);
 	
 	var skipButton = Titanium.UI.createButton({
    		title: L('edit_skip_btn'),
-   		//width: '30%',
+   		//width: '40%',
    		//backgroundColor :'#ff0000',
    		backgroundImage:'./images/button-red.png',
    		backgroundSelectedImage:'./images/button-red-active.png',
    		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'55%',
+   		left:'57%',
    		width: '35%',
-   		height: '35%'
+   		height: '25%'
 		});
 	/*button.add(Ti.UI.createLabel({
     	text: L('sleep_btn_txt'),
