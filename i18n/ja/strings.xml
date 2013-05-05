@@ -16,4 +16,8 @@
 	<string name="sleep_btn_txt">Спать</string>
 	<string name="nearest_sleep">Ближайший сон</string>
 	<string name="sleep_left">Осталось</string>
+	<string name="edit_move_btn">Сместить</string>
+	<string name="edit_skip_btn">Пропустить</string>
+	<string name="wake_up_btn">Проснуться</string>
+	<string name="change_btn">Изменить</string>
 </resources>

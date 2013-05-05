@@ -17,11 +17,11 @@ var angleSpeed = 6.0 / (2.0 * /*4.0 **/ delta);
 var angle = 0;
  //arrow
 //var xArrowScale = 0.001;
-var yArrowScale = 0.79;
+var yArrowScale = 0.84;
 var xArrowScale = yArrowScale * 25 / 172;
 var yOffs = 13.0/172.0;
 var mountFrac=2.0/172.0;
-var arrowRadFrac = 1.3 / 46.0;
+var arrowRadFrac = 0.9 / 46.0;
 
 var ctx;
 var canvas;
@@ -71,9 +71,10 @@ function drawCanvas()
   ctx.drawImage(bgrImage,0,0,width, height);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
   
+  
     
 
-  var watchesRad = watchesSize * (250 - 45) / 500;
+  var watchesRad = watchesSize * (250 - 65) / 500;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var angles = getAngles(timeIntervals[idx]);
@@ -89,9 +90,10 @@ function drawCanvas()
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
   }
- 
+  ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
    
   var arrowLen = watchesRad * yArrowScale;
+  var arrW = 5;
   ctx.save();
   //ctx.translate(3,3);
   ctx.shadowColor = "rgba(75,75,75,75)";
@@ -103,7 +105,7 @@ function drawCanvas()
   ctx.fillStyle = "rgba(155,155,155,1)";
   ctx.fill();
   
-  ctx.lineWidth = 7;
+  ctx.lineWidth = arrW;
   ctx.beginPath();
   ctx.moveTo(centerX, centerY);
   ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -117,7 +119,7 @@ function drawCanvas()
   ctx.fillStyle = "rgb(206,23,23)";
   ctx.fill();
   
-  ctx.lineWidth = 7;
+  ctx.lineWidth = arrW;
   ctx.beginPath();
   ctx.moveTo(centerX, centerY);
   ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -125,18 +127,18 @@ function drawCanvas()
   ctx.stroke();
   
   var mountHalf = mountFrac * watchesSize;
-  ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
-  ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf, 2 * mountHalf, 2 * mountHalf);
+  
+  ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf + 1, 2 * mountHalf, 2 * mountHalf);
 
-  ctx.fillStyle = "#494d56";
+  /*ctx.fillStyle = "#494d56";
   ctx.font = "bold 26pt Helvetica Neue ";
   var dgtC = 1.03;
   var symbolH = watchesSize / 18;
   var symbolW = watchesSize / 25;
   ctx.fillText("12", centerX - symbolW, centerY - dgtC * watchesRad);
-  ctx.fillText("3", centerX + dgtC * watchesRad/* + symbolW*/, centerY + symbolH / 2);
+  ctx.fillText("3", centerX + dgtC * watchesRad, centerY + symbolH / 2);
   ctx.fillText("6", centerX - symbolW / 2, centerY + dgtC * watchesRad + symbolH);
-  ctx.fillText("9", centerX - dgtC * watchesRad - symbolW, centerY + symbolH / 2 );
+  ctx.fillText("9", centerX - dgtC * watchesRad - symbolW, centerY + symbolH / 2 );*/
 }
 
 
@@ -174,13 +176,13 @@ window.onload = function() {
     bgrImage.src = './images/background.png';
 
     clockBgr = new Image();
-    clockBgr.src = './images/clock-bg.png';
+    clockBgr.src = './images/clock-down@2x.png';
 
     ticksImg = new Image();
-    ticksImg.src = './images/clock-labels.png';
+    ticksImg.src = './images/clock-up@2x.png';
 
-    arrowImg = new Image();
-    arrowImg.src = './images/arrow.png';
+  //  arrowImg = new Image();
+  //  arrowImg.src = './images/arrow.png';
 
    // glassImg = new Image();
    // glassImg.src = './images/clock-glace.png';

@@ -20,6 +20,8 @@ function SleepView() {
 	if (osname === 'iphone' || osname === 'ipad') {
 		webView.repaint(); 
 	}
+	var topView = Ti.UI.createView({top : '0%', width:'100%', height:'30%', backgroundImage :"images/moon.png"});
+	self.add(topView);
 	
 	var timerView = Ti.UI.createView({top : '30%', width:'100%', height:'30%'});
 	timerView.add(webView);

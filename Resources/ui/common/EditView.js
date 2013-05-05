@@ -26,9 +26,9 @@ function EditView() {
 		disableBounce:true,
 		scalesPageToFit:true,
 	  left:'0%',
-	  top:'12%',
+	  top:'6%',
 	  width:'70%' ,
-      height: '75%'  , backgroundColor : 'transparent'        
+      height: '85%'  , backgroundColor : 'transparent'        
     });
 	 var first = Boolean(true);
 	self.layout = 'vertical';
@@ -37,7 +37,7 @@ function EditView() {
 	self.addEventListener('postlayout',function(e)
 	{
 		var w = self.size.width * 0.7;
-		var h = self.size.height * 0.3 * 0.75;
+		var h = self.size.height * 0.3 * 0.85;
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.2;
 		//webView.reload();
 		//webView.repaint(); 
@@ -113,8 +113,36 @@ function EditView() {
 		
 	});	
 	//topView.layout = 'horizontal';
+	//Ti.API.info("Ti.Locale.currentLanguage = " + Ti.Locale.currentLanguage);
+    //Ti.API.info("Ti.Locale.currentLocale = " + Ti.Locale.currentLocale);
 	
 	self.add(topView);
+	var topRightView = Ti.UI.createView({left:'70%',top:'0%',width:'30%',height:'100%'});
+	var labelSlTime = Ti.UI.createLabel({
+    		color: '#000',
+  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#fff',
+  		shadowOffset: {x:0, y:1},
+    		text: '06:00',
+    		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    		left:'5%',
+    		top:'25%',
+    		width:'85%', height: 35
+ 		}); 	
+ 	topRightView.add(labelSlTime);
+ 	var labelSlTimeTxt = Ti.UI.createLabel({
+    		color: '#494d56',
+  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#fff',
+  		shadowOffset: {x:0, y:1},
+    		text: 'Общее время сна',
+    		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    		left:'0%',
+    		top:'40%',
+    		width:'100%', height: 35
+ 		}); 	
+ 	topRightView.add(labelSlTimeTxt);	
+	topView.add(topRightView);
 	
 	//TABLE VIEW********
 	var sleepIntervals = [];

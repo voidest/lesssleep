@@ -29,11 +29,11 @@ function ClockView(myWidth, myHeight) {
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.6;
 		//webView.reload();
 		//webView.repaint(); 
-		if(h < 342)
+		if(h < 276)
 		{
 			return;
 		}
-		Ti.API.info("Received " + w + " " + h + " new rows.");
+		Ti.API.info("Received " + w + " " + h + " new rows." + Ti.Platform.displayCaps.platformHeight);
 		if(!first)
 		{
 			self.visible = true;

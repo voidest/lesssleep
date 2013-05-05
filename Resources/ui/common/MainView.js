@@ -1,5 +1,6 @@
 //FirstView Component Constructor
 function MainView(parentRect) {
+	Ti.App.Properties.setString('SETTING_LANGUAGE', 'en');
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
 	height:'100%'/*,

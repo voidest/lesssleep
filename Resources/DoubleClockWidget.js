@@ -64,7 +64,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
   var centerY = watchesY + watchesSize / 2;
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
-  var watchesRad = watchesSize * (250 - 45) / 500;
+  var watchesRad = watchesSize * (250 - 18) / 500;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var angles = getAngles(timeIntervals[idx], amTime);
@@ -83,6 +83,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
   }
+  ctx.drawImage(!amTime ? ticksImg1 : ticksImg2, watchesX,watchesY,watchesSize, watchesSize);
  
   if(drawArrow) 
   {
@@ -122,7 +123,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
   
   
   var mountHalf = mountFrac * watchesSize;
-  ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
+  
   ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf, 2 * mountHalf, 2 * mountHalf);
 
   
@@ -207,13 +208,16 @@ window.onload = function() {
     bgrImage.src = './images/background.png';
 
     clockBgr = new Image();
-    clockBgr.src = './images/clock-bg.png';
+    clockBgr.src = './images/clock-small-down@2x.png';
 
-    ticksImg = new Image();
-    ticksImg.src = './images/clock-labels.png';
+    ticksImg1 = new Image();
+    ticksImg1.src = './images/clock-small-1st-up@2x.png';
+    
+    ticksImg2 = new Image();
+    ticksImg2.src = './images/clock-small-2nd-up@2x.png';
 
-    arrowImg = new Image();
-    arrowImg.src = './images/arrow.png';
+    //arrowImg = new Image();
+    //arrowImg.src = './images/arrow.png';
 
    // glassImg = new Image();
    // glassImg.src = './images/clock-glace.png';
