@@ -8,9 +8,11 @@ function ApplicationWindow() {
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff', navBarHidden: true
 	});
+	
 		
 	var sleepView = new SleepView();
-	self.add(sleepView);	
+	
+	//self.add(sleepView);	
 	//construct UI
 	var firstView = new MainView();
 	self.add(firstView);
@@ -18,7 +20,12 @@ function ApplicationWindow() {
 			self.animate({view:sleepView, transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 		});*/
 	Ti.App.addEventListener("sleepButtonPressed", function (event) {
-    		self.animate({view:sleepView, transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+    		//self.animate({view:sleepView, transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+    			var sleepWnd = Ti.UI.createWindow({
+		backgroundColor:'#ffffff', navBarHidden: true});
+		sleepWnd.add(sleepView);
+		self.containingTab.open(sleepWnd, {animated:true});
+
     });
 	
 	return self;

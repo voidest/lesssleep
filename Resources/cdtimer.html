@@ -3,25 +3,30 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script src="jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="jquery.countdown.js" type="text/javascript" charset="utf-8"></script>
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
       $(function(){
+      	//alert('');
         $('#counter').countdown({
-          image: 'digits.png',
-          startTime: '01:12:12:00'
+          image: 'digits@2x.png',
+          format: 'hh:mm:ss',
+          digitWidth:106,
+          digitHeight:154,
+          startTime: '01:12:00'
         });
       });
-   </script>-->
-   <script type="text/javascript" src="./SleepTimer.js"></script> 	
+   </script>
+    <div id="counter"></div> 
+   <!--<script type="text/javascript" src="./SleepTimer.js"></script>--> 	
     <style type="text/css">
       br { clear: both; }
       .cntSeparator {
-        font-size: 54px;
+        font-size: 124px;
         margin: 10px 7px;
         color: #000;
       }
     </style>
   </head>
 <body>
- <center> <div id="counter"></div></center> 
+
 </body>
 </html>

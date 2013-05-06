@@ -3,29 +3,35 @@ function SleepView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
 	height:'100%'/*,
-	backgroundImage :"images/background.png"*/});
+	backgroundImage :"images/background.png"}*/});
 	//var flipCounter = require('flipCounter');
 	//var myCounter = new flipCounter("counter", {inc: 23, pace: 500});
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
-		scalesPageToFit:true,
+		scalesPageToFit:true,url : "./cdtimer.html",
+		touchEnabled:false,
+		top:'45%',
 	  left : '20%',	
-	  width:'60%' 
-    //  height:'100%'          
+	  width:'384px' ,
+      height:'150px'          
     });
-	webView.url = "./cdtimer.html";
-	//self.add(webView);
+	//webView.url = "./cdtimer.html";
+	
+	webView.scalesPageToFit = true;
+	    webView.disableBounce = true;
+	self.add(webView);
 	webView.reload();
 	var osname = Ti.Platform.osname;
 	if (osname === 'iphone' || osname === 'ipad') {
 		webView.repaint(); 
 	}
-	var topView = Ti.UI.createView({top : '0%', width:'100%', height:'30%', backgroundImage :"images/moon.png"});
+	var topView = Ti.UI.createView({top : '0%', width:'100%', height:'396px', backgroundImage :"images/moon.png"});
+	
 	self.add(topView);
 	
-	var timerView = Ti.UI.createView({top : '30%', width:'100%', height:'30%'});
-	timerView.add(webView);
-	self.add(timerView);
+	//var timerView = Ti.UI.createView({top : '396px', width:'100%', height:'30%'});
+	//timerView.add(webView);
+	//self.add(timerView);
 	
 	var botView = Ti.UI.createView({top : '60%', width:'100%', height:'30%'});
 	
