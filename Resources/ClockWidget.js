@@ -21,7 +21,7 @@ var yArrowScale = 0.84;
 var xArrowScale = yArrowScale * 25 / 172;
 var yOffs = 13.0/172.0;
 var mountFrac=2.0/172.0;
-var arrowRadFrac = 0.9 / 46.0;
+var arrowRadFrac = 1.1 / 46.0;
 
 var ctx;
 var canvas;
@@ -82,10 +82,11 @@ function drawCanvas()
     var endAngle = angles[0];
     //Ti.API.info("" + angles + " new rows.");
     ctx.beginPath();
-    ctx.moveTo(centerX, centerY);  
-    ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle)); 
+    ctx.moveTo(centerX, centerY); 
+    ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));   
+     
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
-    ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));  
+    ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
     ctx.lineTo(centerX, centerY);  
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
@@ -93,11 +94,11 @@ function drawCanvas()
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
    
   var arrowLen = watchesRad * yArrowScale;
-  var arrW = 5;
+  var arrW = 6;
   ctx.save();
   //ctx.translate(3,3);
-  ctx.shadowColor = "rgba(75,75,75,75)";
-  ctx.shadowBlur = 8;
+  ctx.shadowColor = "rgba(55,55,55,55)";
+  ctx.shadowBlur = 10;
   ctx.shadowOffsetX = 3;
   ctx.shadowOffsetY = 3;
   ctx.beginPath();  
