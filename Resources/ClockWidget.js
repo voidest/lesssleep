@@ -97,7 +97,7 @@ function drawCanvas()
   var arrW = 6;
   ctx.save();
   //ctx.translate(3,3);
-  ctx.shadowColor = "rgba(55,55,55,55)";
+  ctx.shadowColor = "rgba(135,135,135,15)";
   ctx.shadowBlur = 10;
   ctx.shadowOffsetX = 3;
   ctx.shadowOffsetY = 3;
@@ -129,7 +129,7 @@ function drawCanvas()
   
   var mountHalf = mountFrac * watchesSize;
   
-  ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf + 1, 2 * mountHalf, 2 * mountHalf);
+  ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf, 2 * mountHalf, 2 * mountHalf);
 
   /*ctx.fillStyle = "#494d56";
   ctx.font = "bold 26pt Helvetica Neue ";
@@ -174,7 +174,7 @@ window.onload = function() {
 
      //images 
     bgrImage = new Image();
-    bgrImage.src = './images/background.png';
+    bgrImage.src = './images/cream-bg@2x.png';
 
     clockBgr = new Image();
     clockBgr.src = './images/clock-down@2x.png';

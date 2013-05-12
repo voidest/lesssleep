@@ -48,7 +48,7 @@ function ApplicationTabGroup() {
 		settingsWin = new Window();
 	
 	var baseUITab = Ti.UI.createTab({
-		title: L('main_tab_title'),
+		title: 'Main',// L('main_tab_title'),
 		icon: '/icons/timer.png',
 		window: baseWin
 	});
@@ -79,6 +79,7 @@ function ApplicationTabGroup() {
 	});
 	settingsWin.containingTab = settingsTab;
 	self.addTab(settingsTab);
+	//self.activeTab = editTab;
 	/*
 	var controlsTab = Ti.UI.createTab({
 		title: L('controls_win_title'),

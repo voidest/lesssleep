@@ -14,7 +14,7 @@
 	<string name="info_tab_title">Info</string>
 	<string name="settings_tab_title">Settings</string>
 	<string name="sleep_btn_txt">Спать</string>
-	<string name="nearest_sleep">Ближайший сон</string>
+	<string name="nearest_sleep">Next nap</string>
 	<string name="sleep_left">Осталось</string>
 	<string name="edit_move_btn">Сместить</string>
 	<string name="edit_skip_btn">Пропустить</string>

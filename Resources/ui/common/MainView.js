@@ -12,85 +12,91 @@ function MainView(parentRect) {
 	self.top = (parentHeight - size) / 2;
 	self.left = (parentWidth - size) / 2;*/
 	//self.repaint();
-	self.layout = 'vertical';
+	//self.layout = 'vertical';
 	var ClockView = require('ui/common/ClockView');
-	clockView = new ClockView('100%', '75%');
+	var clockHeight = 'auto';// "" + (Ti.Platform.displayCaps.platformHeight * 2 - 184) + "px";
+	clockView = new ClockView('100%', clockHeight);
 	
-	var panelView = Ti.UI.createView({width:'100%', height:'25%', backgroundImage:'./images/gray-line-big.png'});
+	var panelView = Ti.UI.createView({width:'100%', height:'184px', bottom: '0px', backgroundImage:'./images/gray-bg.png'});
 	
-	panelView.layout = 'horizontal';
+	//panelView.layout = 'horizontal';
 	self.add(clockView);
 	self.add(panelView);
+	var sideOffset = '31px';
+	var top1Offset = '22px';
+	var top2Offset = '59px';
+	var top21Offset = '99px';
+	var top22Offset = '135px';
 	
 	
 	
-	var labelsView = Ti.UI.createView({width:'60%', height:'100%'});
-	panelView.add(labelsView);
-	labelsView.layout = 'vertical';
 	
 	var labelTimer1 = Ti.UI.createLabel({
  		color: '#000',
-  		font:{fontSize:18,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'03:40',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: '5%',
-  		left: '10%',
-  		width: '90%', height: '25%'
+  		top: top1Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '25%'
 	});
-	labelsView.add(labelTimer1);
+	panelView.add(labelTimer1);
 	
 	var labelSleepTime = Ti.UI.createLabel({
  		color: '#494d56',
-  		font:{fontSize:11,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:L('nearest_sleep'),
+  		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		//top: '2%',
-  		left: '10%',
-  		width: '90%', height: '8%'
+  		top: top2Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '8%'
 	});
-	labelsView.add(labelSleepTime);
+	panelView.add(labelSleepTime);
 	
 	var labelTimer2 = Ti.UI.createLabel({
  		color: '#000',
-  		font:{fontSize:18,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'01:40:13',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: '18%',
-  		left: '10%',
-  		width: '90%', height: '25%'
+  		top: top21Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '25%'
 	});
-	labelsView.add(labelTimer2);
+	panelView.add(labelTimer2);
 	
 	var labelSleepLeft = Ti.UI.createLabel({
  		color: '#494d56',
-  		font:{fontSize:11,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:L('sleep_left'),
+  		text:'Time left',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		//top: '2%',
-  		left: '10%',
-  		width: '90%', height: '8%'
+  		top: top22Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '8%'
 	});
-	labelsView.add(labelSleepLeft);
+	panelView.add(labelSleepLeft);
 	
 	
-	var buttonView = Ti.UI.createView({width:'40%', height:'100%'});
+	//var buttonView = Ti.UI.createView({width:'40%', height:'100%'});
 	
 	var button = Titanium.UI.createButton({
-   		title: L('sleep_btn_txt'),
-   		width: '60%',
+   		//title: L('sleep_btn_txt'),
+   		right:sideOffset,
+   		width:'122px',
+   		height:'60px',
+   		//width: '60%',
    		//backgroundColor :'#ff0000',
-   		backgroundImage:'./images/button-red.png',
-   		backgroundSelectedImage:'./images/button-red-active.png',
-   		font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		height: '35%'
+   		backgroundImage:'./images/button-sleep.png',
+   		backgroundSelectedImage:'./images/button-sleep-pressed.png',
+   		//font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+   		//height: '35%'
 		});
 	button.addEventListener('click',function(e)
 	{
@@ -104,8 +110,8 @@ function MainView(parentRect) {
     	width: 'auto',
     	height: 'auto'
 	}));*/
-	buttonView.add(button);
-	panelView.add(buttonView);
+	//buttonView.add(button);
+	panelView.add(button);
 	
 /*	var textArea = Ti.UI.createTextArea({
   borderWidth: 2,

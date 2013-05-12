@@ -12,7 +12,7 @@ function TimeToStr(interval, i)
 
 function IntervalToString(interval)
 {
-	return "" + TimeToStr(interval, 0) + " - " + TimeToStr(interval, 3);	
+	return "" + TimeToStr(interval, 0) + " – " + TimeToStr(interval, 3);	
 }
 
 function EditView() {
@@ -22,22 +22,24 @@ function EditView() {
 	backgroundImage :"images/background.png"*/});
 	
 	//self.add(basicSwitch);
+	var sideOffset = '31px';
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,
-	  left:'0%',
-	  top:'6%',
-	  width:'70%' ,
-      height: '85%'  , backgroundColor : 'transparent'        
+	  left:sideOffset,
+	 // top:'6%',
+	  //width:'70%' ,
+	  width:'330px',
+      height: '150px'  , backgroundColor : 'transparent'        
     });
 	 var first = Boolean(true);
-	self.layout = 'vertical';
+	//self.layout = 'vertical';
 	
-	var topView = Ti.UI.createView({width:'100%', height:'30%', backgroundImage:'./images/gray-line-big.png'});
+	var topView = Ti.UI.createView({width:'100%', height:'184px', top:'0px', backgroundImage:'./images/gray-bg.png'});
 	self.addEventListener('postlayout',function(e)
 	{
-		var w = self.size.width * 0.7;
-		var h = self.size.height * 0.3 * 0.85;
+		var w = 165;
+		var h = 75;
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.2;
 		//webView.reload();
 		//webView.repaint(); 
@@ -117,7 +119,8 @@ function EditView() {
     //Ti.API.info("Ti.Locale.currentLocale = " + Ti.Locale.currentLocale);
 	
 	self.add(topView);
-	var topRightView = Ti.UI.createView({left:'70%',top:'0%',width:'30%',height:'100%'});
+	
+	//var topRightView = Ti.UI.createView({left:'70%',top:'0%',width:'30%',height:'100%'});
 	var labelSlTime = Ti.UI.createLabel({
     		color: '#000',
   		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
@@ -125,24 +128,23 @@ function EditView() {
   		shadowOffset: {x:0, y:1},
     		text: '06:00',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-    		left:'5%',
-    		top:'25%',
-    		width:'85%', height: 35
+    		right:sideOffset,
+    		top: '56px',
+    	//	width:'85%', height: 35
  		}); 	
- 	topRightView.add(labelSlTime);
+ 	topView.add(labelSlTime);
  	var labelSlTimeTxt = Ti.UI.createLabel({
     		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-    		text: 'Общее время сна',
-    		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    		left:'0%',
-    		top:'40%',
-    		width:'100%', height: 35
+    		text: 'Total sleeping time',
+    		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    		right:sideOffset,
+    		top:'95px',
+    		//width:'100%', height: 35
  		}); 	
- 	topRightView.add(labelSlTimeTxt);	
-	topView.add(topRightView);
+ 	topView.add(labelSlTimeTxt);	
 	
 	//TABLE VIEW********
 	var sleepIntervals = [];
@@ -158,6 +160,7 @@ function EditView() {
     		className:'forumEvent', // used to improve table performance
     		selectedBackgroundColor:'white',
     		rowIndex:idx, // custom property, useful for determining the row during events
+    		width:"100%"
     		//height:110
   		}); 
   		//row.layout = 'horizontal';
@@ -166,7 +169,7 @@ function EditView() {
     		font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
     		text: IntervalToString(sleepIntervals[idx]),
     		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    		left:'5%',
+    		left:sideOffset,
     		width:'45%', height: 35
  		}); 		
   		row.add(labelUserName);
@@ -178,12 +181,14 @@ function EditView() {
 		});
 		row.add(image);
   		//
-  		var swTransform = Ti.UI.create2DMatrix().scale(0.75);
+  		var swTransform = Ti.UI.create2DMatrix().scale(0.72);
   		var basicSwitch = Ti.UI.createSwitch({
   			value:true, // mandatory property for iOS,
-  			left:'75%',
+  			//right:sideOffset,
   			transform : swTransform,
-  			width : '35%'  
+  			left:'478px',
+  			//width : '153px',
+  			//height : '53px'  
 		});
 		row.add(basicSwitch);
 		
@@ -194,7 +199,10 @@ function EditView() {
 	
 	var tableView = Ti.UI.createTableView({
      backgroundColor:'white',
-     height :'45%',
+     //height :'45%',
+     top:'184px',
+     bottom:'184px',
+     width:'100%',
      data:tableData,
      footerTitle:''
     });
@@ -203,14 +211,17 @@ function EditView() {
     
     
     //add bottom buttons
-	var panelView = Ti.UI.createView({width:'100%', height:'25%', backgroundImage:'./images/gray-line-big.png'});
+    
+	var top1Offset = '22px';
+	var top2Offset = '59px';
+	var top21Offset = '99px';
+	var top22Offset = '135px';
+	var panelView = Ti.UI.createView({width:'100%', height:'184px', bottom :'0px', backgroundImage:'./images/gray-bg.png'});
 	
-	panelView.layout = 'horizontal';
+	//panelView.layout = 'horizontal';
 	self.add(panelView);
 	//LABELS VIEW ************
-	var labelsView = Ti.UI.createView({width:'30%', height:'100%'});
-	panelView.add(labelsView);
-	labelsView.layout = 'vertical';
+	
 	
 	var labelTimer1 = Ti.UI.createLabel({
  		color: '#000',
@@ -219,24 +230,24 @@ function EditView() {
   		shadowOffset: {x:0, y:1},
   		text:'03:40',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: '5%',
-  		left: '10%',
-  		width: '90%', height: '25%'
+  		top: top1Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '25%'
 	});
-	labelsView.add(labelTimer1);
+	panelView.add(labelTimer1);
 	
 	var labelSleepTime = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:L('nearest_sleep'),
+  		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		//top: '2%',
-  		left: '10%',
-  		width: '90%', height: '8%'
+  		top: top2Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '8%'
 	});
-	labelsView.add(labelSleepTime);
+	panelView.add(labelSleepTime);
 	
 	var labelTimer2 = Ti.UI.createLabel({
  		color: '#000',
@@ -245,62 +256,52 @@ function EditView() {
   		shadowOffset: {x:0, y:1},
   		text:'01:40:13',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: '18%',
-  		left: '10%',
-  		width: '90%', height: '25%'
+  		top: top21Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '25%'
 	});
-	labelsView.add(labelTimer2);
+	panelView.add(labelTimer2);
 	
 	var labelSleepLeft = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:L('sleep_left'),
+  		text:'Time left',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		//top: '2%',
-  		left: '10%',
-  		width: '90%', height: '8%'
+  		top: top22Offset,
+  		left: sideOffset,
+  		//width: '90%', height: '8%'
 	});
-	labelsView.add(labelSleepLeft);
+	panelView.add(labelSleepLeft);
 	///buttons!!
-	var buttonView = Ti.UI.createView({width:'70%', height:'100%'});
+	//var buttonView = Ti.UI.createView({width:'70%', height:'100%'});
 	//buttonView.layout = 'horizontal';
 	var undoButton = Titanium.UI.createButton({
    		//backgroundColor :'#ffffff',
-   		image:'./icons/icon-undo.png',
-   		//backgroundSelectedImage:'./images/button-red-active.png',
+   		backgroundImage:'./images/button-undo.png',
+   		backgroundSelectedImage:'./images/button-undo-pressed.png',
    		//font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'40%',
-   		width:35,
-   		height: 35
+   		right:'163px',
+   		width:'61px',
+   		height: '61px'
 		});
-	buttonView.add(undoButton);
+	panelView.add(undoButton);
 	
-	var button = Titanium.UI.createButton({
-   		title: L('edit_move_btn'),
+	var skipButton = Titanium.UI.createButton({
+   		//title: L('edit_move_btn'),
    		//width: '30%',
    		//backgroundColor :'#ff0000',
-   		backgroundImage:'./images/button-red.png',
-   		backgroundSelectedImage:'./images/button-red-active.png',
-   		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'20%',
-   		width: '30%',
-   		height: '35%'
+   		backgroundImage:'./images/button-skip.png',
+   		backgroundSelectedImage:'./images/button-skip-pressed.png',
+   		//font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+   		right:sideOffset,
+   		width: '122px',
+   		height: '60px'
 		});
 	//buttonView.add(button);
 	
-	var skipButton = Titanium.UI.createButton({
-   		title: L('edit_skip_btn'),
-   		//width: '40%',
-   		//backgroundColor :'#ff0000',
-   		backgroundImage:'./images/button-red.png',
-   		backgroundSelectedImage:'./images/button-red-active.png',
-   		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'57%',
-   		width: '35%',
-   		height: '25%'
-		});
+	
 	/*button.add(Ti.UI.createLabel({
     	text: L('sleep_btn_txt'),
     	color: 'red',
@@ -309,9 +310,9 @@ function EditView() {
     	width: 'auto',
     	height: 'auto'
 	}));*/
-	buttonView.add(skipButton);
+	panelView.add(skipButton);
 	
-	panelView.add(buttonView);	
+	//panelView.add(buttonView);	
 	return self;
 }
 

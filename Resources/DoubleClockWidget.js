@@ -19,8 +19,8 @@ var angle = 0;
 var yArrowScale = 0.79;
 var xArrowScale = yArrowScale * 25 / 172;
 var yOffs = 13.0/172.0;
-var mountFrac=2.0/172.0;
-var arrowRadFrac = 1.3 / 46.0;
+var mountFrac=4.0/172.0;
+var arrowRadFrac = 2.2 / 46.0;
 
 var ctx;
 var canvas;
@@ -64,7 +64,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
   var centerY = watchesY + watchesSize / 2;
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
-  var watchesRad = watchesSize * (250 - 18) / 500;
+  var watchesRad = /*watchesSize * (250 - 18) / 500*/71;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var angles = getAngles(timeIntervals[idx], amTime);
@@ -74,11 +74,12 @@ function drawWatches(wData, drawArrow, angle, amTime)
   	var begAngle = angles[1];
     var endAngle = angles[0];
     //Ti.API.info("" + angles + " new rows.");
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);  
-    ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle)); 
+     ctx.beginPath();
+    ctx.moveTo(centerX, centerY); 
+    ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));   
+     
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
-    ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));  
+    ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
     ctx.lineTo(centerX, centerY);  
     ctx.fillStyle = '#e5837f';//radialgradient; 
     ctx.fill();    
@@ -90,8 +91,8 @@ function drawWatches(wData, drawArrow, angle, amTime)
     var arrowLen = watchesRad * yArrowScale;
     ctx.save();
     //ctx.translate(3,3);
-    ctx.shadowColor = "rgba(75,75,75,75)";
-    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(135,135,135,15)";
+    ctx.shadowBlur = 12;
     ctx.shadowOffsetX = 3;
     ctx.shadowOffsetY = 3;
     ctx.beginPath();  
@@ -99,7 +100,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.fillStyle = "rgba(155,155,155,1)";
     ctx.fill();
     
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -113,7 +114,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.fillStyle = "rgb(206,23,23)";
     ctx.fill();
     
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
@@ -122,7 +123,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
   }
   
   
-  var mountHalf = mountFrac * watchesSize;
+  var mountHalf = 4;//mountFrac * watchesSize;
   
   ctx.drawImage(mountImg,centerX - mountHalf, centerY - mountHalf, 2 * mountHalf, 2 * mountHalf);
 
@@ -190,22 +191,33 @@ window.onload = function() {
     watchesSize = (width > height ? height : width) * perc;
     watchesX = (width - watchesSize) / 2;
     watchesY = (height - watchesSize) / 2;*/
-    var leftPerc = 0.05;
+    /*var leftPerc = 0.00;
     var leftW = {
         x: width * leftPerc,
         y: width * leftPerc,
-        size: width * (0.5 - 2 * leftPerc) 
+        size: width * (0.5 - 2 * leftPerc)
     };
     watchesData.push(leftW);   
     var rightW = {
-        x: width * (0.5 + leftPerc),
+        x: width * (0.5 + leftPerc) + 15,
         y: width * leftPerc,
         size: width * (0.5 - 2 * leftPerc)
+    };*/
+   var leftW = {
+        x: 0,
+        y: 0,
+        size: height
+    };
+    watchesData.push(leftW);   
+    var rightW = {
+        x: height + 30,
+        y: 0,
+        size: height
     };
     watchesData.push(rightW);   
     //images 
-    bgrImage = new Image();
-    bgrImage.src = './images/background.png';
+    //bgrImage = new Image();
+    //bgrImage.src = './images/background.png';
 
     clockBgr = new Image();
     clockBgr.src = './images/clock-small-down@2x.png';
