@@ -3,14 +3,14 @@ function SleepView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
 	height:'100%',
-	backgroundImage :"images/background.png"});
+	backgroundImage :"images/cream-bg.png"});
 	//var flipCounter = require('flipCounter');
 	//var myCounter = new flipCounter("counter", {inc: 23, pace: 500});
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,url : "./cdtimer.html",
 		touchEnabled:false,
-		top:'50%',
+		top:'430px',
 	  left : '20%',	
 	  width:'384px' ,
       height:'150px', backgroundColor : 'transparent'          
@@ -28,12 +28,13 @@ function SleepView() {
 	var topView = Ti.UI.createView({top : '0%', width:'100%', height:'396px', backgroundImage :"images/moon.png"});
 	
 	self.add(topView);
+	var sideOffset = '31px';
 	
 	//var timerView = Ti.UI.createView({top : '396px', width:'100%', height:'30%'});
 	//timerView.add(webView);
 	//self.add(timerView);
 	
-	var botView = Ti.UI.createView({top : '60%', width:'100%', height:'40%'});
+	//var botView = Ti.UI.createView({top : '60%', width:'100%', height:'40%'});
 	var buttonMusic = Titanium.UI.createButton({
    		//title: L('wake_up_btn'),
    		//width: '30%',
@@ -41,10 +42,9 @@ function SleepView() {
    		backgroundImage:'./images/alarm-bg.png',
    		backgroundSelectedImage:'./images/alarm-bg-pressed.png',
    		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'5%',
-   		top :'25%',
-   		width: '90%',
-   		height: '90px'
+   		left:sideOffset,
+   		right:sideOffset,
+   		bottom :'203px',height : '92px'
 		});
 	var labelSoundCaption = Ti.UI.createLabel({
  		color: '#000',
@@ -53,7 +53,7 @@ function SleepView() {
   		shadowOffset: {x:0, y:1},
   		text:'Alarm sound',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: '32%',
+  		bottom :'228px',
   		left: '10%',
   		
 	});
@@ -65,7 +65,7 @@ function SleepView() {
   		shadowOffset: {x:0, y:1},
   		text:'Insanity',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-  		top: '32%',
+  		bottom :'228px',
   		left: '10%',
   		width:'75%'
   		
@@ -78,9 +78,9 @@ function SleepView() {
    		backgroundImage:'./images/button-wakeup.png',
    		backgroundSelectedImage:'./images/button-wakeup-pressed.png',
    		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'5%',
-   		top :'55%',
-   		width: '42%',
+   		left:sideOffset,
+   		bottom :'92px',
+   		width: '269px',
    		height: '92px'
 		});
 	var buttonChng = Titanium.UI.createButton({
@@ -90,28 +90,29 @@ function SleepView() {
    		backgroundImage:'./images/button-edit.png',
    		backgroundSelectedImage:'./images/button-edit-pressed.png',
    		font:{fontSize:24,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		left:'53%',
-   		top: '55%',
-   		width: '42%',
+   		right:sideOffset,
+   		bottom :'92px',
+   		width: '269px',
    		height: '92px'
 		});	
 	buttonWake.addEventListener('click', function(e)
 	{
-		alert('kal');
+		/*alert('kal');
 		var date = new Date (); 
 		var notification = Ti.App.iOS.scheduleLocalNotification (
 			{ alertBody: "Kitchen Sink was put in background", 
 			alertAction: "Re-Launch!", 
 			userInfo: {"hello": "world"}, 
 			sound: "pop.caf", 
-			date: new Date (new Date (). getTime () + 5000) });
-	})
-	botView.add(buttonMusic);
-	botView.add(labelSoundCaption);
-	botView.add(labelSoundName);
-	botView.add(buttonWake);
-	botView.add(buttonChng);
-	self.add(botView);	
+			date: new Date (new Date (). getTime () + 5000) });*/
+			Ti.App.fireEvent("wakeButtonPressed", {data: "sleepIntervals"});
+	});
+	self.add(buttonMusic);
+	self.add(labelSoundCaption);
+	self.add(labelSoundName);
+	self.add(buttonWake);
+	self.add(buttonChng);
+	//self.add(botView);	
 	return self;
 }
 	
