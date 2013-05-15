@@ -311,6 +311,16 @@ function EditView() {
     	height: 'auto'
 	}));*/
 	panelView.add(skipButton);
+	skipButton.addEventListener('click', function(e)
+	{
+		var date = new Date (); 
+		var notification = Ti.App.iOS.scheduleLocalNotification (
+			{ alertBody: "YA YA YABLOKI YELA", 
+			alertAction: "Re-Launch!", 
+			userInfo: {"hello": "world"}, 
+			sound: "pop.caf", 
+			date: new Date (new Date (). getTime () + 8000) });
+	});
 	
 	//panelView.add(buttonView);	
 	return self;

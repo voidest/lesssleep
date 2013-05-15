@@ -7,7 +7,7 @@ function ClockView(myWidth, myHeight) {
 	var self = Ti.UI.createView({width:myWidth, bottom: '184px'});
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
-		scalesPageToFit:true,
+		scalesPageToFit:true,backgroundColor : '#f3f3f3',   
 	  width:'100%' ,
       height:'100%'          
     });

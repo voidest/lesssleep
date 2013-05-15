@@ -68,7 +68,7 @@ function drawCanvas()
   	return;
   } 
   angle = newAngle;
-  ctx.drawImage(bgrImage,0,0,width, height);
+  //ctx.drawImage(bgrImage,0,0,width, height);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
   
   
@@ -88,7 +88,7 @@ function drawCanvas()
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
     ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
     ctx.lineTo(centerX, centerY);  
-    ctx.fillStyle = '#e5837f';//radialgradient; 
+    ctx.fillStyle = '#abaaa7';//radialgradient; 
     ctx.fill();    
   }
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
@@ -173,8 +173,8 @@ window.onload = function() {
     watchesY = (height - watchesSize) / 2;
 
      //images 
-    bgrImage = new Image();
-    bgrImage.src = './images/cream-bg@2x.png';
+    //bgrImage = new Image();
+    //bgrImage.src = './images/cream-bg@2x.png';
 
     clockBgr = new Image();
     clockBgr.src = './images/clock-down@2x.png';
@@ -189,7 +189,7 @@ window.onload = function() {
    // glassImg.src = './images/clock-glace.png';
 
     mountImg = new Image();
-    mountImg.src = './images/mount.png';
+    mountImg.src = './images/mount@2x.png';
     var date = new Date();
   	var hours = date.getHours();
   	var minutes = date.getMinutes();
