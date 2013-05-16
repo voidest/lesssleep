@@ -18,8 +18,8 @@ function IntervalToString(interval)
 function EditView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
-	height:'100%'/*,
-	backgroundImage :"images/background.png"*/});
+	height:'100%',
+	backgroundImage :"images/cream-bg.png"});
 	
 	//self.add(basicSwitch);
 	var sideOffset = '31px';
@@ -36,6 +36,11 @@ function EditView() {
 	//self.layout = 'vertical';
 	
 	var topView = Ti.UI.createView({width:'100%', height:'184px', top:'0px', backgroundImage:'./images/gray-bg.png'});
+	var sleepIntervals = [];
+	sleepIntervals.push([1, 30, 0, 5, 0, 0]);
+	sleepIntervals.push([ 1, 0, 1,  1, 20, 1]);
+	sleepIntervals.push([ 5, 0, 1,  5, 20, 1]);
+	sleepIntervals.push([ 9, 0, 1,  9, 20, 1]);
 	self.addEventListener('postlayout',function(e)
 	{
 		var w = 165;
@@ -95,17 +100,17 @@ function EditView() {
 		//sleepIntervals.push({hhs: 4, mms : 30, pms : true, hhe : 5, mme : 30, pme : true});
 		//sleepIntervals.push({hhs: 6, mms : 20, pms : true, hhe : 8, mme : 30, pme : true});
 		//webView.evalJS("setIntervals1();");
-		var sleepIntervals = [];
+		/*var sleepIntervals = [];
 		sleepIntervals.push([10, 50, 1, 11, 50, 1]);
 		sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
-		sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);
+		sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);*/
 		
 		webView.addEventListener('load', function(e) {
 			/*if(!firstLoad)
 			  return;
 			firstLoad = Boolean(false);*/
 			//alert(sleepIntervals);
-			//webView.evalJS("setIntervals('" + sleepIntervals + "');");  
+			//webView.evalJS("setIntervals('" + sleepIntervals + "');"); 
 			Ti.App.fireEvent("web:data1", {data: sleepIntervals});
 			webView.frame = self.frame;	
 		
@@ -145,12 +150,11 @@ function EditView() {
     		//width:'100%', height: 35
  		}); 	
  	topView.add(labelSlTimeTxt);	
+ 	
 	
 	//TABLE VIEW********
-	var sleepIntervals = [];
-	sleepIntervals.push([10, 50, 1, 11, 50, 1]);
-	sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
-	sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);
+	
+	//Ti.App.fireEvent("web:data1", {data: sleepIntervals});
 	//T
 	var tableData = [];
 	
@@ -166,18 +170,21 @@ function EditView() {
   		//row.layout = 'horizontal';
   		var labelUserName = Ti.UI.createLabel({
     		//color:'#576996',
+    		
     		font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
     		text: IntervalToString(sleepIntervals[idx]),
     		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     		left:sideOffset,
-    		width:'45%', height: 35
+    		//top: '17px',
+    		top:'10px',
+    		width:'45%', height: Ti.UI.SIZE
  		}); 		
   		row.add(labelUserName);
   		//
   		var image = Ti.UI.createImageView({
 		  image:'/icons/icon-alarm.png',
 		  height : 35,
-		  left : '70%'
+		  left : '65%'
 		});
 		row.add(image);
   		//
@@ -186,7 +193,8 @@ function EditView() {
   			value:true, // mandatory property for iOS,
   			//right:sideOffset,
   			transform : swTransform,
-  			left:'478px',
+  			//left:'478px',
+  			left:'416px',
   			//width : '153px',
   			//height : '53px'  
 		});
@@ -200,10 +208,24 @@ function EditView() {
 	var tableView = Ti.UI.createTableView({
      backgroundColor:'white',
      //height :'45%',
-     top:'184px',
-     bottom:'184px',
-     width:'100%',
+     //top:'184px',
+     //bottom:'184px',
+     top:'165px',
+    // bottom:'184px',
+     //width:'100%',
+     left: '10px',
+     right: '10px',
+     //backgroundImage :"images/cream-bg.png",
+     maxRowHeight:'70px',
+     style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
      data:tableData,
+     //borderRadius:10,
+     borderWidth:0,
+     //backgroundView:nil,
+     backgroundColor:'transparent',
+     rowBackgroundColor:'white',
+     //borderColor:'#E0E0E0',
+     
      footerTitle:''
     });
     self.add(tableView);

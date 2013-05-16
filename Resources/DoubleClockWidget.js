@@ -28,6 +28,7 @@ var canvas;
 
 
 var timeIntervals = [];
+var states = [];
 
 var watchesData = [];
 
