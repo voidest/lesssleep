@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 var delta = 10;
  
 var animTimeMs = 1500;//1sec
+=======
+var delta = 40;
+var animTimeMs = 500;//0,3sec
+>>>>>>> fixed width, animation time
 var fps = 1000 / delta;
 var deltaOp = delta / animTimeMs;//1.0 / fps;//Math.floor(255 / fps);
 var opAcc = deltaOp * 0.1;
