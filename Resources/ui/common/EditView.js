@@ -1,4 +1,5 @@
 //FirstView Component Constructor
+var sideOffset = '31px';
 var defaultFontSize = Ti.Platform.name === 'android' ? 16 : 14;
 
 function TimeToStr(interval, i)
@@ -15,6 +16,50 @@ function IntervalToString(interval)
 	return "" + TimeToStr(interval, 0) + " – " + TimeToStr(interval, 3);	
 }
 
+function IntervalToRow(interval, idx)
+{
+	var row = Ti.UI.createTableViewRow({
+    		className:'forumEvent', // used to improve table performance
+    		selectedBackgroundColor:'white',
+    		rowIndex:idx, // custom property, useful for determining the row during events
+    		width:"100%"
+    		//height:110
+  		}); 
+  		//row.layout = 'horizontal';
+  		var labelUserName = Ti.UI.createLabel({
+    		//color:'#576996',
+    		
+    		font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
+    		text: IntervalToString(interval),
+    		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    		left:sideOffset,
+    		//top: '17px',
+    		top:'10px',
+    		width:'45%', height: Ti.UI.SIZE
+ 		}); 		
+  		row.add(labelUserName);
+  		//
+  		var image = Ti.UI.createImageView({
+		  image:'/icons/icon-alarm.png',
+		  height : 35,
+		  left : '65%'
+		});
+		row.add(image);
+  		//
+  		var swTransform = Ti.UI.create2DMatrix().scale(0.72);
+  		var basicSwitch = Ti.UI.createSwitch({
+  			value:true, // mandatory property for iOS,
+  			//right:sideOffset,
+  			transform : swTransform,
+  			//left:'478px',
+  			left:'416px',
+  			//width : '153px',
+  			//height : '53px'  
+		});
+		row.add(basicSwitch);
+		return row;
+}
+
 function EditView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
@@ -22,7 +67,7 @@ function EditView() {
 	backgroundImage :"images/cream-bg.png"});
 	
 	//self.add(basicSwitch);
-	var sideOffset = '31px';
+	
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,
@@ -161,7 +206,7 @@ function EditView() {
 	
 	for(var idx = 0; idx < sleepIntervals.length; ++idx)
     {
-    	var row = Ti.UI.createTableViewRow({
+    	var row = IntervalToRow(sleepIntervals[idx], idx);/* Ti.UI.createTableViewRow({
     		className:'forumEvent', // used to improve table performance
     		selectedBackgroundColor:'white',
     		rowIndex:idx, // custom property, useful for determining the row during events
@@ -199,7 +244,7 @@ function EditView() {
   			//width : '153px',
   			//height : '53px'  
 		});
-		row.add(basicSwitch);
+		row.add(basicSwitch);*/
 		
 		
 		//
@@ -356,6 +401,11 @@ function EditView() {
 			sleepIntervals1.push([4, 0, 1, 5, 30, 1]);
 			Ti.App.fireEvent("web:data1", {data: sleepIntervals, states:sstates});
 			Ti.App.fireEvent("web:data", {data: sleepIntervals1});
+			tableView.deleteRow(2, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
+			tableView.deleteRow(1, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
+			var row = IntervalToRow(sleepIntervals[4], 2);
+			tableView.appendRow(row, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
+			
 	});
 	
 	//panelView.add(buttonView);	
