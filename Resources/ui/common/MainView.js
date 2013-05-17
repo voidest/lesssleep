@@ -36,7 +36,7 @@ function MainView(parentRect) {
   		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:'03:40',
+  		text:'13:00',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
   		top: top1Offset,
   		left: sideOffset,
@@ -111,6 +111,34 @@ function MainView(parentRect) {
     	height: 'auto'
 	}));*/
 	//buttonView.add(button);
+	var hNextSl = 13;
+	var mNextSl = 0;
+	var sNextSl = 0;
+	 Ti.App.addEventListener("nextSleepChanged", function (event) {
+    	hNextSl = event.hh;
+		mNextSl = event.mm;
+		sNextSl = event.ss;
+
+    });
+	setInterval(function(){
+		 var date = new Date();
+  		 var hours = date.getHours();
+  		 var minutes = date.getMinutes();
+  		 var seconds = date.getSeconds();
+  		 hours = hNextSl > hours ? hours : hours + 24;
+  		 var v1 = hours * 3600 + minutes * 60 + seconds;
+  		 var v2 = hNextSl * 3600 + mNextSl * 60 + sNextSl;
+  		 var d = v2 - v1;
+  		 var ss = d % 60;
+  		 d -= ss;
+  		 d = Math.floor(d / 60);
+  		 var mm = d % 60;
+  		 d -= mm;
+  		 var hh = Math.floor(d / 60); 		 
+  		 labelTimer2.setText('' +  (hh > 9 ? '' : '0') + hh + 
+  		  				':' +  (mm > 9 ? '' : '0') + mm +
+  		  				':' +  (ss > 9 ? '' : '0') + ss); 		    
+	}, 1000);
 	panelView.add(button);
 	
 /*	var textArea = Ti.UI.createTextArea({

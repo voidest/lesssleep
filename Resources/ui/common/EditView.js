@@ -177,7 +177,7 @@ function EditView() {
   		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-    		text: '06:00',
+    		text: '04:30',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     		right:sideOffset,
     		top: '56px',
@@ -296,7 +296,7 @@ function EditView() {
   		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-  		text:'03:40',
+  		text:'13:00',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
   		top: top1Offset,
   		left: sideOffset,
@@ -379,6 +379,29 @@ function EditView() {
     	height: 'auto'
 	}));*/
 	panelView.add(skipButton);
+	var hNextSl = 13;
+	var mNextSl = 0;
+	var sNextSl = 0;
+	setInterval(function(){
+		 var date = new Date();
+  		 var hours = date.getHours();
+  		 var minutes = date.getMinutes();
+  		 var seconds = date.getSeconds();
+  		 hours = hNextSl > hours ? hours : hours + 24;
+  		 var v1 = hours * 3600 + minutes * 60 + seconds;
+  		 var v2 = hNextSl * 3600 + mNextSl * 60 + sNextSl;
+  		 var d = v2 - v1;
+  		 var ss = d % 60;
+  		 d -= ss;
+  		 d = Math.floor(d / 60);
+  		 var mm = d % 60;
+  		 d -= mm;
+  		 var hh = Math.floor(d / 60); 		 
+  		 labelTimer2.setText('' +  (hh > 9 ? '' : '0') + hh + 
+  		  				':' +  (mm > 9 ? '' : '0') + mm +
+  		  				':' +  (ss > 9 ? '' : '0') + ss); 		    
+	}, 1000);
+	
 	skipButton.addEventListener('click', function(e)
 	{
 		/*var date = new Date (); 
@@ -405,6 +428,9 @@ function EditView() {
 			tableView.deleteRow(1, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
 			var row = IntervalToRow(sleepIntervals[4], 2);
 			tableView.appendRow(row, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
+			hNextSl = 16;
+			labelSlTime.setText('05:20');
+			Ti.App.fireEvent("nextSleepChanged", {hh : 16, mm:0, ss:0});
 			
 	});
 	
