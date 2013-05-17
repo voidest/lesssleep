@@ -1,5 +1,7 @@
-var delta = 1000;
-
+var delta = 100;
+var animTimeMs = 1000;//1sec
+var fps = 1000 / delta;
+var deltaOp = delta / animTimeMs;//1.0 / fps;//Math.floor(255 / fps);
 var perc = 0.8;
 var width;
 var height;
@@ -29,6 +31,7 @@ var canvas;
 
 var timeIntervals = [];
 var states = [];
+var ops = [];
 
 var watchesData = [];
 
@@ -63,18 +66,34 @@ function drawWatches(wData, drawArrow, angle, amTime)
   var watchesSize = wData.size; 
   var centerX = watchesX + watchesSize / 2;
   var centerY = watchesY + watchesSize / 2;
+  //Ti.API.info("Inc" + timeIntervals + "  " + states + " " + ops);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
   var watchesRad = /*watchesSize * (250 - 18) / 500*/71;
+  var hasFadeOut = false;
+  for(var idx = 0; idx < timeIntervals.length; ++idx)
+  {
+  	if(states[idx] === -1){
+  		hasFadeOut = true;
+  		break;
+  	}
+  }
+  
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var angles = getAngles(timeIntervals[idx], amTime);
   	var curr = timeIntervals[idx]; 
+  	var opacity = 0;
+  	if(states[idx] === 1){
+  		opacity = 1.0;
+  	}
+  	else{
+  		opacity = ops[idx];
+  	}
   	if(curr[2] != amTime && amTime != curr[5])
   	  continue;
   	var begAngle = angles[1];
     var endAngle = angles[0];
-    //Ti.API.info("" + angles + " new rows.");
      ctx.beginPath();
     ctx.moveTo(centerX, centerY); 
     ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));   
@@ -82,8 +101,26 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
     ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
     ctx.lineTo(centerX, centerY);  
-    ctx.fillStyle = '#e5837f';//radialgradient; 
-    ctx.fill();    
+    ctx.fillStyle = 'rgba(229,131,127, ' + opacity + ')';//'#e5837f';
+    ctx.fill();  
+    
+    if(states[idx] === 0 && !hasFadeOut){
+    	ops[idx] += deltaOp; 
+    	if(ops[idx] >= 1.0){
+    		ops[idx] = 1.0;
+    		states[idx] = 1;
+    	}  
+    }  
+    if(states[idx] === -1){
+    	ops[idx] -= deltaOp;  
+    	if(ops[idx] < 0.1){
+    		ops[idx] = 0;
+    		states[idx] = -2;
+    	} 
+    }  
+    
+    
+    
   }
   ctx.drawImage(!amTime ? ticksImg1 : ticksImg2, watchesX,watchesY,watchesSize, watchesSize);
  
@@ -140,13 +177,21 @@ function drawCanvas()
   var am = hours < 12;
   hours = hours >= 12 ? hours - 12 : hours;
   var newAngle = HHMMToAngles(hours, minutes);
+  var onAnim = false;
+  for(var idx = 0; idx < timeIntervals.length; ++idx)
+  {
+  	if(states[idx] != 1 && states[idx] != -2){
+  		onAnim = true;
+  		break;
+  	}
+  }
   //var newAngle = (2 * Math.PI * seconds) / (60);
   var deltaAngle = angle - newAngle;
   //Ti.API.info("Received " + angle  + " " + newAngle + " new rows.");
-  if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && fadeInOn === 0 && fadeOutOn === 0)
+  /*if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && !onAnim)
   {
   	return;
-  } 
+  } */
   angle = newAngle;
   //ctx.drawImage(bgrImage,0,0,width, height);
   drawWatches(watchesData[0], am, angle, 0);
@@ -180,8 +225,7 @@ function update()
 
 
 window.onload = function() {
-
-    canvas = document.getElementById('canvas');
+	canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
      
 
@@ -248,8 +292,21 @@ window.onload = function() {
     
     Ti.App.addEventListener("web:data1", function (event) {
     	timeIntervals = event.data;
+    	states = event.states;
+    	ops = [];
+    	for(var idx = 0; idx < timeIntervals.length; ++idx)
+		  {
+		  	var o = 0;
+		  	if(states[idx] === -1){
+		  		o = 1.0;		  		
+		  	}
+		  	if(states[idx] === 0){
+		  		o = 0;
+		  	}
+		  	ops.push(o);
+		  }
+		  //alert(ops);
     	//alert("" + timeIntervals[0]);
-    //	Ti.API.info("Received " + timeIntervals + " new rows.");
     });
     
     //Ti.App.fireEvent('helloWorld', { data : escape("Hello World") } );
