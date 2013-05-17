@@ -41,6 +41,7 @@ function EditView() {
 	sleepIntervals.push([ 1, 0, 1,  1, 20, 1]);
 	sleepIntervals.push([ 5, 0, 1,  5, 20, 1]);
 	sleepIntervals.push([ 9, 0, 1,  9, 20, 1]);
+	var sstates = [1,1,1,1];
 	self.addEventListener('postlayout',function(e)
 	{
 		var w = 165;
@@ -111,7 +112,7 @@ function EditView() {
 			firstLoad = Boolean(false);*/
 			//alert(sleepIntervals);
 			//webView.evalJS("setIntervals('" + sleepIntervals + "');"); 
-			Ti.App.fireEvent("web:data1", {data: sleepIntervals});
+			Ti.App.fireEvent("web:data1", {data: sleepIntervals, states:sstates});
 			webView.frame = self.frame;	
 		
 			webView.disableBounce = true;
@@ -335,13 +336,26 @@ function EditView() {
 	panelView.add(skipButton);
 	skipButton.addEventListener('click', function(e)
 	{
-		var date = new Date (); 
+		/*var date = new Date (); 
 		var notification = Ti.App.iOS.scheduleLocalNotification (
 			{ alertBody: "YA YA YABLOKI YELA", 
 			alertAction: "Re-Launch!", 
 			userInfo: {"hello": "world"}, 
 			sound: "pop.caf", 
-			date: new Date (new Date (). getTime () + 8000) });
+			date: new Date (new Date (). getTime () + 8000) });*/
+			var sleepIntervals = [];
+			sleepIntervals.push([1, 30, 0, 5, 0, 0]);
+			sleepIntervals.push([ 1, 0, 1,  1, 20, 1]);
+			sleepIntervals.push([ 5, 0, 1,  5, 20, 1]);
+			sleepIntervals.push([ 9, 0, 1,  9, 20, 1]);
+			sleepIntervals.push([4, 0, 1, 5, 30, 1]);
+			var sstates = [1,-1,-1, 1, 0];
+			var sleepIntervals1 = [];
+			sleepIntervals1.push([1, 30, 0, 5, 0, 0]);
+			sleepIntervals1.push([ 9, 0, 1,  9, 20, 1]);
+			sleepIntervals1.push([4, 0, 1, 5, 30, 1]);
+			Ti.App.fireEvent("web:data1", {data: sleepIntervals, states:sstates});
+			Ti.App.fireEvent("web:data", {data: sleepIntervals1});
 	});
 	
 	//panelView.add(buttonView);	

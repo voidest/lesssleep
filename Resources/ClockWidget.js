@@ -5,6 +5,7 @@ var width;
 var height;
 var centerX;
 var centerY;
+var updated = false;
 //images
 var bgrImage;
 var clockBgr;
@@ -40,6 +41,21 @@ function HHMMToAngles(hh, mm)
 	return 2 * Math.PI  * (mm + hh * 60) / (12 * 60) - Math.PI / 2;	
 }
 
+function getAngles(timeInterval, amTime)
+{
+  
+  if(timeInterval[2] != timeInterval[5])
+  {
+  	if(timeInterval[2] === amTime)  	 
+      return [HHMMToAngles(timeInterval[0], timeInterval[1]), 2 * Math.PI];
+    else
+      return [0, HHMMToAngles(timeInterval[3], timeInterval[4])];  
+  }
+  startAngle = HHMMToAngles(timeInterval[0], timeInterval[1]);
+  endAngle   = HHMMToAngles(timeInterval[3], timeInterval[4]);
+  return [startAngle, endAngle];
+}
+
 //var cx = 
 function getAngles(timeInterval)
 {
@@ -57,13 +73,14 @@ function drawCanvas()
   var date = new Date();
   var hours = date.getHours();
   var minutes = date.getMinutes();
-  var seconds = date.getSeconds();                    
+  var seconds = date.getSeconds();         
+   var am = hours < 12;           
   hours = hours >= 12 ? hours - 12 : hours;
   var newAngle = HHMMToAngles(hours, minutes);
   //var newAngle = (2 * Math.PI * seconds) / (60);
   var deltaAngle = angle - newAngle;
   //Ti.API.info("Received " + angle  + " " + newAngle + " new rows.");
-  if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && fadeInOn === 0 && fadeOutOn === 0)
+  if(Math.abs(deltaAngle) < 2 * Math.PI / 120 && !updated)
   {
   	return;
   } 
@@ -71,13 +88,16 @@ function drawCanvas()
   //ctx.drawImage(bgrImage,0,0,width, height);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
   
-  
+  updated = false;
     
 
   var watchesRad = watchesSize * (250 - 65) / 500;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
-  	var angles = getAngles(timeIntervals[idx]);
+  	var curr = timeIntervals[idx]; 
+  	if(curr[2] != am && am != curr[5])
+  	  continue;
+  	var angles = getAngles(timeIntervals[idx], am);
     var begAngle = angles[1];
     var endAngle = angles[0];
     //Ti.API.info("" + angles + " new rows.");
@@ -201,6 +221,7 @@ window.onload = function() {
     
     Ti.App.addEventListener("web:data", function (event) {
     	timeIntervals = event.data;
+    	updated = true;
     	//alert("" + timeIntervals[0]);
     //	Ti.API.info("Received " + timeIntervals + " new rows.");
     });
