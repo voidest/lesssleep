@@ -1,7 +1,9 @@
-var delta = 100;
-var animTimeMs = 1000;//1sec
+var delta = 10;
+ 
+var animTimeMs = 1500;//1sec
 var fps = 1000 / delta;
 var deltaOp = delta / animTimeMs;//1.0 / fps;//Math.floor(255 / fps);
+var opAcc = deltaOp * 0.1;
 var perc = 0.8;
 var width;
 var height;
@@ -32,6 +34,7 @@ var canvas;
 var timeIntervals = [];
 var states = [];
 var ops = [];
+var opsSpeeds = [];
 
 var watchesData = [];
 
@@ -105,18 +108,21 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.fill();  
     
     if(states[idx] === 0 && !hasFadeOut){
-    	ops[idx] += deltaOp; 
+    	ops[idx] += opsSpeeds[idx];
+    	opsSpeeds[idx] += opAcc;
     	if(ops[idx] >= 1.0){
     		ops[idx] = 1.0;
     		states[idx] = 1;
-    	}  
+    	}
     }  
     if(states[idx] === -1){
-    	ops[idx] -= deltaOp;  
+    	ops[idx] -= opsSpeeds[idx];
+    	opsSpeeds[idx] += opAcc; 
     	if(ops[idx] < 0.1){
     		ops[idx] = 0;
     		states[idx] = -2;
-    	} 
+    	}
+    	Ti.API.info("" + ops[idx]); 
     }  
     
     
@@ -294,6 +300,7 @@ window.onload = function() {
     	timeIntervals = event.data;
     	states = event.states;
     	ops = [];
+    	opsSpeeds = [];
     	for(var idx = 0; idx < timeIntervals.length; ++idx)
 		  {
 		  	var o = 0;
@@ -304,8 +311,10 @@ window.onload = function() {
 		  		o = 0;
 		  	}
 		  	ops.push(o);
+		  	opsSpeeds.push(deltaOp);
 		  }
-		  //alert(ops);
+		  
+		  Ti.API.info("" + opsSpeeds);
     	//alert("" + timeIntervals[0]);
     });
     
