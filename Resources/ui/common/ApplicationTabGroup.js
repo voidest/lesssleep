@@ -79,7 +79,7 @@ function ApplicationTabGroup() {
 	});
 	settingsWin.containingTab = settingsTab;
 	self.addTab(settingsTab);
-	self.activeTab = editTab;
+	//self.activeTab = editTab;
 	/*
 	var controlsTab = Ti.UI.createTab({
 		title: L('controls_win_title'),
