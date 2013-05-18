@@ -91,7 +91,7 @@ function drawCanvas()
   updated = false;
     
 
-  var watchesRad = watchesSize * (250 - 65) / 500;
+  var watchesRad = 244;//watchesSize * (250 - 65) / 500;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
   	var curr = timeIntervals[idx]; 
@@ -187,12 +187,13 @@ window.onload = function() {
     width = canvas.width;
     height = canvas.height;
      
-    centerX = width / 2;
-    centerY = height / 2;
+    
     //watchesSize = (width > height ? height : width) * perc;
     watchesSize = 640;
-    watchesX = (width - watchesSize) / 2;
+    watchesX = 0;(width - watchesSize) / 2;
     watchesY = (height - watchesSize) / 2;
+    centerX = watchesX + watchesSize / 2;
+    centerY = watchesY + watchesSize / 2;
 
      //images 
     bgrImage = new Image();
