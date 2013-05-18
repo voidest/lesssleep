@@ -85,7 +85,7 @@ function drawCanvas()
   	return;
   } 
   angle = newAngle;
-  //ctx.drawImage(bgrImage,0,0,width, height);
+  ctx.drawImage(bgrImage,0,0,width, height);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
   
   updated = false;
@@ -113,8 +113,8 @@ function drawCanvas()
   }
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
    
-  var arrowLen = watchesRad * yArrowScale;
-  var arrW = 6;
+  var arrowLen = 194;watchesRad * yArrowScale;
+  var arrW = 8;
   ctx.save();
   //ctx.translate(3,3);
   ctx.shadowColor = "rgba(135,135,135,15)";
@@ -122,7 +122,8 @@ function drawCanvas()
   ctx.shadowOffsetX = 3;
   ctx.shadowOffsetY = 3;
   ctx.beginPath();  
-  ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
+  var arrBSize = 18;//watchesSize * arrowRadFrac;
+  ctx.arc(centerX, centerY, arrBSize, 0, Math.PI * 2);
   ctx.fillStyle = "rgba(155,155,155,1)";
   ctx.fill();
   
@@ -136,15 +137,15 @@ function drawCanvas()
    
   
   ctx.beginPath();  
-  ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
-  ctx.fillStyle = "rgb(206,23,23)";
+  ctx.arc(centerX, centerY, arrBSize, 0, Math.PI * 2);
+  ctx.fillStyle = "#E10A1B";
   ctx.fill();
   
   ctx.lineWidth = arrW;
   ctx.beginPath();
   ctx.moveTo(centerX, centerY);
   ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
-  ctx.strokeStyle = "rgb(206,23,23)";
+  ctx.strokeStyle = "#E10A1B";
   ctx.stroke();
   
   var mountHalf = mountFrac * watchesSize;
@@ -194,8 +195,8 @@ window.onload = function() {
     watchesY = (height - watchesSize) / 2;
 
      //images 
-    //bgrImage = new Image();
-    //bgrImage.src = './images/cream-bg@2x.png';
+    bgrImage = new Image();
+    bgrImage.src = './images/cream-bg@2x.png';
 
     clockBgr = new Image();
     clockBgr.src = './images/clock-down@2x.png';
