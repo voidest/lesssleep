@@ -89,8 +89,8 @@ function MainView(parentRect) {
 	var button = Titanium.UI.createButton({
    		//title: L('sleep_btn_txt'),
    		right:sideOffset,
-   		width:'122px',
-   		height:'60px',
+   		width:'269px',
+   		height:'92px',
    		//width: '60%',
    		//backgroundColor :'#ff0000',
    		backgroundImage:'./images/button-sleep.png',

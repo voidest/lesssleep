@@ -350,9 +350,9 @@ function EditView() {
    		backgroundImage:'./images/button-undo.png',
    		backgroundSelectedImage:'./images/button-undo-pressed.png',
    		//font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-   		right:'163px',
-   		width:'61px',
-   		height: '61px'
+   		right:'320px',
+   		width:'89px',
+   		height: '92px'
 		});
 	panelView.add(undoButton);
 	
@@ -364,8 +364,8 @@ function EditView() {
    		backgroundSelectedImage:'./images/button-skip-pressed.png',
    		//font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
    		right:sideOffset,
-   		width: '122px',
-   		height: '60px'
+   		width: '269px',
+   		height: '92px'
 		});
 	//buttonView.add(button);
 	

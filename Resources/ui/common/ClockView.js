@@ -83,7 +83,7 @@ function ClockView(myWidth, myHeight) {
 		//webView.evalJS("setIntervals1();");
 		sleepIntervals.push([10, 50, 1, 11, 50, 1]);
 		sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
-		sleepIntervals.push([ 6, 20, 1,  8, 30, 1]);
+		sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);
 		
 		webView.addEventListener('load', function(e) {
 			/*if(!firstLoad)

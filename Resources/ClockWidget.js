@@ -74,7 +74,7 @@ function drawCanvas()
   var hours = date.getHours();
   var minutes = date.getMinutes();
   var seconds = date.getSeconds();         
-   var am = hours < 12;           
+   var am = hours > 12;           
   hours = hours >= 12 ? hours - 12 : hours;
   var newAngle = HHMMToAngles(hours, minutes);
   //var newAngle = (2 * Math.PI * seconds) / (60);
@@ -113,7 +113,7 @@ function drawCanvas()
   }
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);
    
-  var arrowLen = 194;watchesRad * yArrowScale;
+  var arrowLen = 194;//watchesRad * yArrowScale;
   var arrW = 8;
   ctx.save();
   //ctx.translate(3,3);
@@ -122,7 +122,7 @@ function drawCanvas()
   ctx.shadowOffsetX = 3;
   ctx.shadowOffsetY = 3;
   ctx.beginPath();  
-  var arrBSize = 18;//watchesSize * arrowRadFrac;
+  var arrBSize = 16;//watchesSize * arrowRadFrac;
   ctx.arc(centerX, centerY, arrBSize, 0, Math.PI * 2);
   ctx.fillStyle = "rgba(155,155,155,1)";
   ctx.fill();
