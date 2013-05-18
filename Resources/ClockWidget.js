@@ -85,6 +85,7 @@ function drawCanvas()
   	return;
   } 
   angle = newAngle;
+  ctx.clearRect(0,0,width, height);
   ctx.drawImage(bgrImage,0,0,width, height);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);
   

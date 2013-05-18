@@ -7,6 +7,7 @@ var opAcc = deltaOp * 0.1;
 var perc = 0.8;
 var width;
 var height;
+var updated = false;
 
 //images
 var bgrImage;
@@ -68,11 +69,11 @@ function drawWatches(wData, drawArrow, angle, amTime)
   var watchesY = wData.y;
   var watchesSize = wData.size; 
   var centerX = watchesX + watchesSize / 2;
-  var centerY = watchesY + watchesSize / 2;
-  //Ti.API.info("Inc" + timeIntervals + "  " + states + " " + ops);
+  var centerY = watchesY + 2 +  watchesSize / 2;
+  //Ti.API.info("Inc" + centerX + "  " + centerY);
   ctx.drawImage(clockBgr,watchesX,watchesY,watchesSize, watchesSize);  
 
-  var watchesRad = /*watchesSize * (250 - 18) / 500*/71;
+  var watchesRad = /*watchesSize * (250 - 18) / 500*/73;
   var hasFadeOut = false;
   for(var idx = 0; idx < timeIntervals.length; ++idx)
   {
@@ -98,13 +99,14 @@ function drawWatches(wData, drawArrow, angle, amTime)
   	var begAngle = angles[1];
     var endAngle = angles[0];
      ctx.beginPath();
+     ctx.lineWidth = 1;
     ctx.moveTo(centerX, centerY); 
-    ctx.lineTo(centerX + watchesRad * Math.cos(begAngle), centerY + watchesRad * Math.sin(begAngle));   
+    ctx.lineTo(centerX + Math.floor(watchesRad * Math.cos(begAngle)), centerY + Math.floor(watchesRad * Math.sin(begAngle)));   
      
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
-    ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
+    ctx.moveTo(centerX + Math.floor(watchesRad * Math.cos(endAngle)), centerY + Math.floor(watchesRad * Math.sin(endAngle)));
     ctx.lineTo(centerX, centerY);  
-    ctx.fillStyle = 'rgba(229,131,127, ' + opacity + ')';//'#e5837f';
+    ctx.fillStyle = 'rgba(171,171,167, ' + opacity + ')';//'#e5837f';
     ctx.fill();  
     
     if(states[idx] === 0 && !hasFadeOut){
@@ -127,7 +129,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
     
     
   }
-  ctx.drawImage(!amTime ? ticksImg1 : ticksImg2, watchesX,watchesY,watchesSize, watchesSize);
+  ctx.drawImage(!amTime ? ticksImg1 : ticksImg2, watchesX,watchesY,watchesSize + 1, watchesSize);
  
   if(drawArrow) 
   {
@@ -154,14 +156,14 @@ function drawWatches(wData, drawArrow, angle, amTime)
     
     ctx.beginPath();  
     ctx.arc(centerX, centerY, watchesSize * arrowRadFrac, 0, Math.PI * 2);
-    ctx.fillStyle = "rgb(206,23,23)";
+    ctx.fillStyle = "#E10A1B";
     ctx.fill();
     
     ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(centerX + arrowLen * Math.cos(angle), centerY + arrowLen * Math.sin(angle));
-    ctx.strokeStyle = "rgb(206,23,23)";
+    ctx.strokeStyle = "#E10A1B";
     ctx.stroke();
   }
   
@@ -198,6 +200,7 @@ function drawCanvas()
   	return;
   } */
   angle = newAngle;
+  ctx.clearRect(0,0,width, height);
   //ctx.drawImage(bgrImage,0,0,width, height);
   drawWatches(watchesData[0], am, angle, 0);
   drawWatches(watchesData[1], !am, angle, 1);
@@ -236,6 +239,7 @@ window.onload = function() {
 
     width = canvas.width;
     height = canvas.height;
+    Ti.API.info(width + '+ ' + height);
     /*centerX = width / 2;
     centerY = height / 2;
     watchesSize = (width > height ? height : width) * perc;
@@ -253,18 +257,21 @@ window.onload = function() {
         y: width * leftPerc,
         size: width * (0.5 - 2 * leftPerc)
     };*/
+   var h  =150;
    var leftW = {
-        x: 0,
-        y: 0,
-        size: height
+        x: 1,
+        y: 1,
+        size: h
     };
     watchesData.push(leftW);   
     var rightW = {
-        x: height + 30,
-        y: 0,
-        size: height
+        x: h + 33,
+        y: 1,
+        size: h
     };
+    //Ti.API.info(height, width);
     watchesData.push(rightW);   
+    //Ti.API.info(watchesData);
     //images 
     //bgrImage = new Image();
     //bgrImage.src = './images/background.png';
@@ -285,7 +292,7 @@ window.onload = function() {
    // glassImg.src = './images/clock-glace.png';
 
     mountImg = new Image();
-    mountImg.src = './images/mount.png';
+    mountImg.src = './images/mount@2x.png';
     var date = new Date();
   	var hours = date.getHours();
   	var minutes = date.getMinutes();
@@ -312,7 +319,7 @@ window.onload = function() {
 		  	ops.push(o);
 		  	opsSpeeds.push(deltaOp);
 		  }
-		  
+		updated = true;  
     	//alert("" + timeIntervals[0]);
     });
     

@@ -74,8 +74,8 @@ function EditView() {
 	  left:sideOffset,
 	 // top:'6%',
 	  //width:'70%' ,
-	  width:'330px',
-      height: '150px'  , backgroundColor : 'transparent'        
+	  width:'332px',
+      height: '152px'  , backgroundColor : 'transparent'        
     });
 	 var first = Boolean(true);
 	//self.layout = 'vertical';
@@ -89,8 +89,8 @@ function EditView() {
 	var sstates = [1,1,1,1];
 	self.addEventListener('postlayout',function(e)
 	{
-		var w = 165;
-		var h = 75;
+		var w = 166;
+		var h = 76;
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.2;
 		//webView.reload();
 		//webView.repaint(); 
