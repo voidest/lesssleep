@@ -188,7 +188,12 @@ window.onload = function() {
      
     centerX = width / 2;
     centerY = height / 2;
+<<<<<<< HEAD
     watchesSize = 640;//(width > height ? height : width) * perc;
+=======
+    //watchesSize = (width > height ? height : width) * perc;
+    watchesSize = 640;
+>>>>>>> fixed width, animation time
     watchesX = (width - watchesSize) / 2;
     watchesY = (height - watchesSize) / 2;
 
