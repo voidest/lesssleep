@@ -29,7 +29,7 @@ function ClockView(myWidth, myHeight) {
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.6;
 		//webView.reload();
 		//webView.repaint(); 
-		if(h < 276)
+		if(h < 407)
 		{
 			return;
 		}
