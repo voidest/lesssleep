@@ -47,7 +47,7 @@ function MainView(parentRect) {
 	var labelSleepTime = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
+  		shadowColor: '#4c000000',
   		shadowOffset: {x:0, y:1},
   		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -73,7 +73,7 @@ function MainView(parentRect) {
 	var labelSleepLeft = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
+  		shadowColor: '#4c000000',
   		shadowOffset: {x:0, y:1},
   		text:'Time left',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,

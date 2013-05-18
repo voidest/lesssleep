@@ -239,7 +239,7 @@ window.onload = function() {
 
     width = canvas.width;
     height = canvas.height;
-    Ti.API.info(width + '+ ' + height);
+    //Ti.API.info(width + '+ ' + height);
     /*centerX = width / 2;
     centerY = height / 2;
     watchesSize = (width > height ? height : width) * perc;

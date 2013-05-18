@@ -187,7 +187,7 @@ function EditView() {
  	var labelSlTimeTxt = Ti.UI.createLabel({
     		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
+  		shadowColor: '#4c000000',
   		shadowOffset: {x:0, y:1},
     		text: 'Total sleeping time',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
@@ -307,7 +307,7 @@ function EditView() {
 	var labelSleepTime = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
+  		shadowColor: '#4c000000',
   		shadowOffset: {x:0, y:1},
   		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -333,7 +333,7 @@ function EditView() {
 	var labelSleepLeft = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
+  		shadowColor: '#4c000000',
   		shadowOffset: {x:0, y:1},
   		text:'Time left',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -355,6 +355,7 @@ function EditView() {
    		height: '92px'
 		});
 	panelView.add(undoButton);
+	undoButton.opacity = 0;
 	
 	var skipButton = Titanium.UI.createButton({
    		//title: L('edit_move_btn'),
@@ -425,12 +426,19 @@ function EditView() {
 			Ti.App.fireEvent("web:data1", {data: sleepIntervals, states:sstates});
 			Ti.App.fireEvent("web:data", {data: sleepIntervals1});
 			tableView.deleteRow(2, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
+			
 			tableView.deleteRow(1, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
 			var row = IntervalToRow(sleepIntervals[4], 2);
 			tableView.appendRow(row, {animated : true, animationStyle : Titanium.UI.iPhone.RowAnimationStyle.FADE});
 			hNextSl = 16;
 			labelSlTime.setText('05:20');
 			Ti.App.fireEvent("nextSleepChanged", {hh : 16, mm:0, ss:0});
+			//undoButton.visible = true;
+			undoButton.animate({
+				curve: Ti.UI.ANIMATION_CURVE_EASE_IN,
+				opacity:1,
+				duration:1000
+			});
 			
 	});
 	
