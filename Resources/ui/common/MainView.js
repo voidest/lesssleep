@@ -121,20 +121,20 @@ function MainView(parentRect) {
 
     });
 	setInterval(function(){
-		 var date = new Date();
+		  var date = new Date();
   		 var hours = date.getHours();
   		 var minutes = date.getMinutes();
   		 var seconds = date.getSeconds();
-  		 hours = hNextSl > hours ? hours : hours + 24;
+  		 var newHours = hNextSl > hours || (hNextSl == hours && mNextSl > minutes) ||  (hNextSl == hours && mNextSl == minutes && sNextSl > seconds) ? hNextSl : hNextSl + 24;
   		 var v1 = hours * 3600 + minutes * 60 + seconds;
-  		 var v2 = hNextSl * 3600 + mNextSl * 60 + sNextSl;
+  		 var v2 = newHours * 3600 + mNextSl * 60 + sNextSl;
   		 var d = v2 - v1;
   		 var ss = d % 60;
   		 d -= ss;
   		 d = Math.floor(d / 60);
   		 var mm = d % 60;
   		 d -= mm;
-  		 var hh = Math.floor(d / 60); 		 
+  		 var hh = Math.floor(d / 60); 	  
   		 labelTimer2.setText('' +  (hh > 9 ? '' : '0') + hh + 
   		  				':' +  (mm > 9 ? '' : '0') + mm +
   		  				':' +  (ss > 9 ? '' : '0') + ss); 		    

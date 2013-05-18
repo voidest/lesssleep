@@ -122,7 +122,6 @@ function drawWatches(wData, drawArrow, angle, amTime)
     		ops[idx] = 0;
     		states[idx] = -2;
     	}
-    	Ti.API.info("" + ops[idx]); 
     }  
     
     
@@ -314,7 +313,6 @@ window.onload = function() {
 		  	opsSpeeds.push(deltaOp);
 		  }
 		  
-		  Ti.API.info("" + opsSpeeds);
     	//alert("" + timeIntervals[0]);
     });
     
