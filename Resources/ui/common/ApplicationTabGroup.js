@@ -11,6 +11,7 @@ function ApplicationTabGroup() {
 		var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 		var Window;
 		var WindowEdit;
+		var WindowInfo = require('ui/handheld/InfoWindow');;
 		if (isTablet) {
 			Window = require('ui/tablet/ApplicationWindow');
 			WindowEdit = require('ui/tablet/EditWindow');
@@ -44,7 +45,7 @@ function ApplicationTabGroup() {
 		*/
 		baseWin = new Window(),
 		editWin = new WindowEdit(),
-		infoWin = new Window(),
+		infoWin = new WindowInfo(),
 		settingsWin = new Window();
 	
 	var baseUITab = Ti.UI.createTab({
@@ -67,7 +68,7 @@ function ApplicationTabGroup() {
 	var infoTab = Ti.UI.createTab({
 		title: L('info_tab_title'),
 		icon: '/icons/tab-icon-info.png',
-		//window: infoWin
+		window: infoWin
 	});
 	infoWin.containingTab = infoTab;
 	self.addTab(infoTab);
