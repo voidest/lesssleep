@@ -49,7 +49,7 @@ function ApplicationTabGroup() {
 	
 	var baseUITab = Ti.UI.createTab({
 		title: 'Main',// L('main_tab_title'),
-		icon: '/icons/timer.png',
+		icon: '/icons/tab-icon-main.png',
 		window: baseWin
 	});
 	baseWin.containingTab = baseUITab;
@@ -58,7 +58,7 @@ function ApplicationTabGroup() {
 	
 	var editTab = Ti.UI.createTab({
 		title: L('edit_tab_title'),
-		icon: '/icons/pencil.png',
+		icon: '/icons/tab-icon-edit.png',
 		window: editWin
 	});
 	editWin.containingTab = editTab;
@@ -66,7 +66,7 @@ function ApplicationTabGroup() {
 
 	var infoTab = Ti.UI.createTab({
 		title: L('info_tab_title'),
-		icon: '/icons/university.png',
+		icon: '/icons/tab-icon-info.png',
 		//window: infoWin
 	});
 	infoWin.containingTab = infoTab;
@@ -74,11 +74,13 @@ function ApplicationTabGroup() {
 	
 	var settingsTab = Ti.UI.createTab({
 		title: L('settings_tab_title'),
-		icon: '/icons/settings.png',
+		icon: '/icons/tab-icon-settings.png',
 		//window: settingsWin
 	});
 	settingsWin.containingTab = settingsTab;
 	self.addTab(settingsTab);
+	self.backgroundImage = '/image/tabs-background.png';
+	self.activeTabBackgroundImage = '/image/tab-selected-bg.png';
 	//self.activeTab = editTab;
 	/*
 	var controlsTab = Ti.UI.createTab({
