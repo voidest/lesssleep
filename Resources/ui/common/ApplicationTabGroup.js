@@ -3,7 +3,7 @@ var messageWin;
 function ApplicationTabGroup() {
 	//create module instance
 	
-	var self = Ti.UI.createTabGroup();
+	var self = Ti.UI.createTabGroup({tabsBackgroundImage : '/images/cream-bg.png'});
 		var osname = Ti.Platform.osname,
 		version = Ti.Platform.version,
 		height = Ti.Platform.displayCaps.platformHeight,
@@ -49,8 +49,9 @@ function ApplicationTabGroup() {
 		settingsWin = new Window();
 	
 	var baseUITab = Ti.UI.createTab({
-		title: 'Main',// L('main_tab_title'),
+		//title: 'Main',// L('main_tab_title'),
 		icon: '/icons/tab-icon-main.png',
+		activeIcon:'/icons/tab-icon-main-active.png',
 		window: baseWin
 	});
 	baseWin.containingTab = baseUITab;
@@ -58,30 +59,33 @@ function ApplicationTabGroup() {
 	
 	
 	var editTab = Ti.UI.createTab({
-		title: L('edit_tab_title'),
+		//title: L('edit_tab_title'),
 		icon: '/icons/tab-icon-edit.png',
+		activeIcon:'/icons/tab-icon-edit-active.png',
 		window: editWin
 	});
 	editWin.containingTab = editTab;
 	self.addTab(editTab);
 
 	var infoTab = Ti.UI.createTab({
-		title: L('info_tab_title'),
+		//title: L('info_tab_title'),
 		icon: '/icons/tab-icon-info.png',
+		activeIcon:'/icons/tab-icon-info-active.png',
 		window: infoWin
 	});
 	infoWin.containingTab = infoTab;
 	self.addTab(infoTab);
 	
 	var settingsTab = Ti.UI.createTab({
-		title: L('settings_tab_title'),
+		//title: L('settings_tab_title'),
 		icon: '/icons/tab-icon-settings.png',
+		activeIcon:'/icons/tab-icon-settings-active.png',
 		//window: settingsWin
 	});
 	settingsWin.containingTab = settingsTab;
 	self.addTab(settingsTab);
-	self.backgroundImage = '/image/tabs-background.png';
-	self.activeTabBackgroundImage = '/image/tab-selected-bg.png';
+	self.tabsBackgroundImage = '/images/tabs-background.png';
+	self.activeTabBackgroundImage = '/images/tab-selected-bg.png';
 	//self.activeTab = editTab;
 	/*
 	var controlsTab = Ti.UI.createTab({
