@@ -5,7 +5,8 @@ function MainView(parentRect) {
 	var self = Ti.UI.createView({width:'100%',
 	height:'100%'/*,
 	backgroundImage :"images/background.png"*/});
-	
+	var topView = Ti.UI.createView({width:'100%', height:'114px', top:'0px', backgroundImage:'./images/top-blue-bar.png'});
+	self.add(topView);
 	var h = parentRect;
 	/*var size = min(parentWidth, parentHeight) * 0.8;
 	self.width = self.height = size;
@@ -23,8 +24,8 @@ function MainView(parentRect) {
 	self.add(clockView);
 	self.add(panelView);
 	var sideOffset = '31px';
-	var top1Offset = '22px';
-	var top2Offset = '59px';
+	var top1Offset = '43px';
+	var top2Offset = '98px';
 	var top21Offset = '99px';
 	var top22Offset = '135px';
 	
@@ -33,7 +34,7 @@ function MainView(parentRect) {
 	
 	var labelTimer1 = Ti.UI.createLabel({
  		color: '#000',
-  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:'25px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'13:00',
@@ -45,9 +46,9 @@ function MainView(parentRect) {
 	panelView.add(labelTimer1);
 	
 	var labelSleepTime = Ti.UI.createLabel({
- 		color: '#494d56',
-  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#4c000000',
+ 		color: '#56565b',
+  		font:{fontSize:'14px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -58,30 +59,33 @@ function MainView(parentRect) {
 	panelView.add(labelSleepTime);
 	
 	var labelTimer2 = Ti.UI.createLabel({
- 		color: '#000',
-  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#fff',
-  		shadowOffset: {x:0, y:1},
+ 		color: '#ffffff',
+  		font:{fontSize:'16px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#88000000',
+  		shadowOffset: {x:0, y:-1},
   		text:'01:40:13',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: top21Offset,
+  		/*top: top21Offset,
   		left: sideOffset,
+  		*/
+  		left:'175px',
+    		bot:'35px',
   		//width: '90%', height: '25%'
 	});
-	panelView.add(labelTimer2);
+	topView.add(labelTimer2);
 	
 	var labelSleepLeft = Ti.UI.createLabel({
- 		color: '#494d56',
-  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#4c000000',
-  		shadowOffset: {x:0, y:1},
-  		text:'Time left',
+ 		color: '#ffffff',
+  		font:{fontSize:'16px',fontWeight:'normal',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#88000000',
+  		shadowOffset: {x:0, y:-1},
+  		text:'left till nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		top: top22Offset,
-  		left: sideOffset,
+  		left:'305px',
+    		bot:'35px',
   		//width: '90%', height: '8%'
 	});
-	panelView.add(labelSleepLeft);
+	topView.add(labelSleepLeft);
 	
 	
 	//var buttonView = Ti.UI.createView({width:'40%', height:'100%'});

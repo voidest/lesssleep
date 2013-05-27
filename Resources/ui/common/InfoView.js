@@ -234,11 +234,11 @@ function InfoView() {
     		text: 'Information',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     		left:'51px',
-    		top:'130px',
+    		top:'140px',
     		//width:'100%', height: 35
  		}); 	
  	self.add(informationLbl);	
-    self.add(CreateInformationTable('140px'));	
+    self.add(CreateInformationTable('150px'));	
     
     
     var additionalLbl = Ti.UI.createLabel({

@@ -34,25 +34,26 @@ function IntervalToRow(interval, idx)
     		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     		left:sideOffset,
     		//top: '17px',
-    		top:'10px',
+    		//top:'3px',
     		width:'45%', height: Ti.UI.SIZE
  		}); 		
   		row.add(labelUserName);
   		//
   		var image = Ti.UI.createImageView({
 		  image:'/icons/icon-alarm.png',
-		  height : 35,
-		  left : '65%'
+		  height : '39px',
+		  left : '343px'
 		});
 		row.add(image);
   		//
-  		var swTransform = Ti.UI.create2DMatrix().scale(0.72);
+  		var swTransform = Ti.UI.create2DMatrix().scale(0.85);
   		var basicSwitch = Ti.UI.createSwitch({
   			value:true, // mandatory property for iOS,
-  			//right:sideOffset,
-  			transform : swTransform,
+  			right:sideOffset,
+  			top:'8px',
+  			//transform : swTransform,
   			//left:'478px',
-  			left:'416px',
+  			//left:'416px',
   			//width : '153px',
   			//height : '53px'  
 		});
@@ -174,22 +175,22 @@ function EditView() {
 	//var topRightView = Ti.UI.createView({left:'70%',top:'0%',width:'30%',height:'100%'});
 	var labelSlTime = Ti.UI.createLabel({
     		color: '#000',
-  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:'25px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
     		text: '04:30',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     		right:sideOffset,
-    		top: '56px',
+    		top: '44px',
     	//	width:'85%', height: 35
  		}); 	
  	topView.add(labelSlTime);
  	var labelSlTimeTxt = Ti.UI.createLabel({
     		color: '#494d56',
-  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#4c000000',
+  		font:{fontSize:'14px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
-    		text: 'Total sleeping time',
+    		text: 'Total sleep time',
     		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     		right:sideOffset,
     		top:'95px',
@@ -256,13 +257,14 @@ function EditView() {
      //height :'45%',
      //top:'184px',
      //bottom:'184px',
-     top:'165px',
+     top:'220px',
     // bottom:'184px',
      //width:'100%',
      left: '10px',
      right: '10px',
      //backgroundImage :"images/cream-bg.png",
-     maxRowHeight:'70px',
+     rowHeight:'71px',
+     maxRowHeight:'71px',
      style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
      data:tableData,
      //borderRadius:10,
@@ -274,16 +276,24 @@ function EditView() {
      
      footerTitle:''
     });
+    var informationLbl = Ti.UI.createLabel({
+    		color: '#4c566c',
+  		font:{fontSize:'17px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#d8ffffff',
+  		shadowOffset: {x:0, y:1},
+    		text: 'Your schedule',
+    		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    		left:'51px',
+    		top:'210px',
+    		//width:'100%', height: 35
+ 		}); 	
+ 	self.add(informationLbl);	
     self.add(tableView);
     
     
     
     //add bottom buttons
     
-	var top1Offset = '22px';
-	var top2Offset = '59px';
-	var top21Offset = '99px';
-	var top22Offset = '135px';
 	var panelView = Ti.UI.createView({width:'100%', height:'184px', bottom :'0px', backgroundImage:'./images/gray-bg.png'});
 	
 	//panelView.layout = 'horizontal';
@@ -291,9 +301,18 @@ function EditView() {
 	//LABELS VIEW ************
 	
 	
+
+	var top1Offset = '43px';
+	var top2Offset = '98px';
+	var top21Offset = '99px';
+	var top22Offset = '135px';
+	
+	
+	
+	
 	var labelTimer1 = Ti.UI.createLabel({
  		color: '#000',
-  		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		font:{fontSize:'25px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
   		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'13:00',
@@ -305,9 +324,9 @@ function EditView() {
 	panelView.add(labelTimer1);
 	
 	var labelSleepTime = Ti.UI.createLabel({
- 		color: '#494d56',
-  		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#4c000000',
+ 		color: '#56565b',
+  		font:{fontSize:'14px',fontWeight:'bold',fontFamily:'Helvetica Neue'},
+  		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'Next nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -328,12 +347,12 @@ function EditView() {
   		left: sideOffset,
   		//width: '90%', height: '25%'
 	});
-	panelView.add(labelTimer2);
+	//panelView.add(labelTimer2);
 	
 	var labelSleepLeft = Ti.UI.createLabel({
  		color: '#494d56',
   		font:{fontSize:10,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-  		shadowColor: '#4c000000',
+  		shadowColor: '#fff',
   		shadowOffset: {x:0, y:1},
   		text:'Time left',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -341,7 +360,7 @@ function EditView() {
   		left: sideOffset,
   		//width: '90%', height: '8%'
 	});
-	panelView.add(labelSleepLeft);
+	//panelView.add(labelSleepLeft);
 	///buttons!!
 	//var buttonView = Ti.UI.createView({width:'70%', height:'100%'});
 	//buttonView.layout = 'horizontal';

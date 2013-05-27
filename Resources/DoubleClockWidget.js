@@ -265,7 +265,7 @@ window.onload = function() {
     };
     watchesData.push(leftW);   
     var rightW = {
-        x: h + 33,
+        x: h + 30,
         y: 1,
         size: h
     };

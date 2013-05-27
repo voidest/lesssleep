@@ -4,7 +4,7 @@ var sleepIntervals = [];
 
 function ClockView(myWidth, myHeight) {
 	//create object instance, a parasitic subclass of Observable
-	var self = Ti.UI.createView({width:myWidth, bottom: '184px'});
+	var self = Ti.UI.createView({top:'114px', width:myWidth, bottom: '184px'});
 	var webView = Ti.UI.createWebView({
 		disableBounce:true,
 		scalesPageToFit:true,backgroundColor : '#f3f3f3',   
@@ -29,7 +29,8 @@ function ClockView(myWidth, myHeight) {
 		var currH = Ti.Platform.displayCaps.platformHeight * 0.6;
 		//webView.reload();
 		//webView.repaint(); 
-		if(h < 407)
+		//Ti.API.info("" + h + " new rows.");
+		if(h < 350)
 		{
 			return;
 		}
