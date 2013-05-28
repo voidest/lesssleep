@@ -10,7 +10,7 @@ function InfoWindow() {
 	self.layout = 'vertical';
 		
 	//construct UI
-	var firstView = new InfoView();
+	var firstView = new InfoView(self);
 	self.add(firstView);
 	
 	return self;

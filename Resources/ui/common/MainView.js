@@ -81,7 +81,7 @@ function MainView(parentRect) {
   		shadowOffset: {x:0, y:-1},
   		text:'left till nap',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		left:'305px',
+  		left:'308px',
     		bot:'35px',
   		//width: '90%', height: '8%'
 	});

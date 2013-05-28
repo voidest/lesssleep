@@ -3,11 +3,6 @@ var sideOffset = '31px';
 var topOffs = '23px';
 var defaultFontSize = Ti.Platform.name === 'android' ? 16 : 14;
 
-function createWindow()
-{
-	
-}
-
 function CreateTopView()
 {
 	var topView = Ti.UI.createView({width:'100%', height:'114px', top:'0px', backgroundImage:'./images/top-blue-bar.png'});
@@ -65,6 +60,9 @@ function CreateInformationTable(topCoord)
     		hasChild:true,
     		//height:110
   		}); 
+  		if(i == 1){
+  			row.test = 'ui/common/GuideWindow';
+  		}
   		//row.layout = 'horizontal';
   		var labelUserName = Ti.UI.createLabel({
     		//color:'#576996',
@@ -215,7 +213,7 @@ function CreateAdditionalTable(topCoord)
     return tableView;	
 }
 
-function InfoView() {
+function InfoView(parent) {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({width:'100%',
 	height:'100%',
@@ -243,7 +241,19 @@ function InfoView() {
     		//width:'100%', height: 35
  		}); 	
  	self.add(informationLbl);	
-    self.add(CreateInformationTable('150px'));	
+ 	var infoTbl = CreateInformationTable('150px')
+    self.add(infoTbl);	
+    infoTbl.addEventListener('click', function(e) {
+		if (e.rowData.test) {
+			var ExampleWindow = require(e.rowData.test),
+				win = new ExampleWindow({
+					title:e.rowData.title,
+					containingTab:parent.containingTab,
+					tabGroup:parent.tabGroup
+				});
+			parent.containingTab.open(win,{animated:true});
+		}
+	});
     
     
     var additionalLbl = Ti.UI.createLabel({
