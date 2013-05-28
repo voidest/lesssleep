@@ -44,7 +44,7 @@ function SleepView() {
    		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
    		left:sideOffset,
    		right:sideOffset,
-   		bottom :'203px',height : '92px'
+   		bottom :'276px',height : '92px'
 		});
 	var labelSoundCaption = Ti.UI.createLabel({
  		color: '#000',
@@ -53,7 +53,7 @@ function SleepView() {
   		shadowOffset: {x:0, y:1},
   		text:'Alarm sound',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-  		bottom :'228px',
+  		bottom :'300px',
   		left: '10%',
   		
 	});
@@ -65,7 +65,7 @@ function SleepView() {
   		shadowOffset: {x:0, y:1},
   		text:'Insanity',
   		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-  		bottom :'228px',
+  		bottom :'300px',
   		left: '10%',
   		width:'75%'
   		
@@ -79,7 +79,7 @@ function SleepView() {
    		backgroundSelectedImage:'./images/button-wakeup-pressed.png',
    		font:{fontSize:12,fontWeight:'bold',fontFamily:'Helvetica Neue'},
    		left:sideOffset,
-   		bottom :'92px',
+   		bottom :'140px',
    		width: '269px',
    		height: '92px'
 		});
@@ -91,7 +91,7 @@ function SleepView() {
    		backgroundSelectedImage:'./images/button-edit-pressed.png',
    		font:{fontSize:24,fontWeight:'bold',fontFamily:'Helvetica Neue'},
    		right:sideOffset,
-   		bottom :'92px',
+   		bottom :'140px',
    		width: '269px',
    		height: '92px'
 		});	

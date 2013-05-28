@@ -3,6 +3,11 @@ var sideOffset = '31px';
 var topOffs = '23px';
 var defaultFontSize = Ti.Platform.name === 'android' ? 16 : 14;
 
+function createWindow()
+{
+	
+}
+
 function CreateTopView()
 {
 	var topView = Ti.UI.createView({width:'100%', height:'114px', top:'0px', backgroundImage:'./images/top-blue-bar.png'});
