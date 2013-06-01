@@ -82,9 +82,10 @@ function ClockView(myWidth, myHeight) {
 		//sleepIntervals.push({hhs: 4, mms : 30, pms : true, hhe : 5, mme : 30, pme : true});
 		//sleepIntervals.push({hhs: 6, mms : 20, pms : true, hhe : 8, mme : 30, pme : true});
 		//webView.evalJS("setIntervals1();");
-		sleepIntervals.push([10, 50, 1, 11, 50, 1]);
-		sleepIntervals.push([ 4, 30, 1,  5, 30, 1]);
-		sleepIntervals.push([ 6, 20, 0,  8, 30, 0]);
+		sleepIntervals.push([1, 30, 0, 5, 0, 0]);
+		sleepIntervals.push([ 1, 0, 1,  1, 20, 1]);
+		sleepIntervals.push([ 5, 0, 1,  5, 20, 1]);
+		sleepIntervals.push([ 9, 0, 1,  9, 20, 1]);
 		
 		webView.addEventListener('load', function(e) {
 			/*if(!firstLoad)

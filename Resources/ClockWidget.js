@@ -74,7 +74,7 @@ function drawCanvas()
   var hours = date.getHours();
   var minutes = date.getMinutes();
   var seconds = date.getSeconds();         
-   var am = hours > 12;           
+  var am = hours >= 12;           
   hours = hours >= 12 ? hours - 12 : hours;
   var newAngle = HHMMToAngles(hours, minutes);
   //var newAngle = (2 * Math.PI * seconds) / (60);
@@ -214,19 +214,19 @@ window.onload = function() {
 
     mountImg = new Image();
     mountImg.src = './images/mount@2x.png';
-    var date = new Date();
+ /*   var date = new Date();
   	var hours = date.getHours();
   	var minutes = date.getMinutes();
   	var seconds = date.getSeconds();                    
   	hours = hours > 12 ? hours - 12 : hours;
     //angle = (hours + minutes * 60) / (12 * 60);
-    angle = HHMMToAngles(hours, minutes) + Math.PI / 2;
+    angle = HHMMToAngles(hours, minutes) + Math.PI / 2;*/
     //angle = (2 * Math.PI * seconds) / (60);
     
     Ti.App.addEventListener("web:data", function (event) {
     	timeIntervals = event.data;
     	updated = true;
-    	//alert("" + timeIntervals[0]);
+    	//Ti.API.info("" + timeIntervals);
     //	Ti.API.info("Received " + timeIntervals + " new rows.");
     });
     
