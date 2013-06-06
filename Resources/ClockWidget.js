@@ -109,7 +109,7 @@ function drawCanvas()
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
     ctx.moveTo(centerX + watchesRad * Math.cos(endAngle), centerY + watchesRad * Math.sin(endAngle));
     ctx.lineTo(centerX, centerY);  
-    ctx.fillStyle = '#abaaa7';//radialgradient; 
+    ctx.fillStyle = '#99b2bf';//radialgradient; 
     ctx.fill();    
   }
   ctx.drawImage(ticksImg,watchesX,watchesY,watchesSize, watchesSize);

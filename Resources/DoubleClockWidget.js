@@ -106,7 +106,7 @@ function drawWatches(wData, drawArrow, angle, amTime)
     ctx.arc(centerX, centerY, watchesRad,begAngle,endAngle, true);
     ctx.moveTo(centerX + Math.floor(watchesRad * Math.cos(endAngle)), centerY + Math.floor(watchesRad * Math.sin(endAngle)));
     ctx.lineTo(centerX, centerY);  
-    ctx.fillStyle = 'rgba(171,171,167, ' + opacity + ')';//'#e5837f';
+    ctx.fillStyle = 'rgba(153,178,191, ' + opacity + ')';//'#6db1d4';
     ctx.fill();  
     
     if(states[idx] === 0 && !hasFadeOut){

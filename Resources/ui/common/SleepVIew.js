@@ -10,7 +10,7 @@ function SleepView() {
 		disableBounce:true,
 		scalesPageToFit:true,url : "./cdtimer.html",
 		touchEnabled:false,
-		top:'430px',
+		top:'480px',
 	  left : '20%',	
 	  width:'384px' ,
       height:'150px', backgroundColor : 'transparent'          
