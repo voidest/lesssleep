@@ -33,6 +33,7 @@ function IntervalToRow(interval, idx)
     		text: IntervalToString(interval),
     		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     		left:sideOffset,
+    		top:'18px',
     		//top: '17px',
     		//top:'3px',
     		width:'45%', height: Ti.UI.SIZE
@@ -50,7 +51,7 @@ function IntervalToRow(interval, idx)
   		var basicSwitch = Ti.UI.createSwitch({
   			value:true, // mandatory property for iOS,
   			right:sideOffset,
-  			top:'8px',
+  			top:'16px',
   			//transform : swTransform,
   			//left:'478px',
   			//left:'416px',
@@ -263,8 +264,9 @@ function EditView() {
      left: '10px',
      right: '10px',
      //backgroundImage :"images/cream-bg.png",
-     rowHeight:'71px',
-     maxRowHeight:'71px',
+     //rowHeight:'71px',
+     rowHeight:'87px',
+     maxRowHeight:'90px',
      style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
      data:tableData,
      //borderRadius:10,
